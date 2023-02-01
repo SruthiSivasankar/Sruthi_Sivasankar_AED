@@ -63,4 +63,28 @@ public class User {
     public Contact getContact() {
         return contact;
     }
+    public Recipe createRecipe(String recipeTitle,int noOfServing,boolean isGlutenFree,double difficultyLevel,int noOfIngredients,String categoryOfFood,String description,String Image){
+        Recipe recipe = new Recipe();
+        
+        recipe.setRecipeTitle(recipeTitle);
+        recipe.setNoOfServing(noOfServing);
+        recipe.setIsGlutenFree(isGlutenFree);
+        recipe.setDifficultyLevel(difficultyLevel);
+        recipe.setNoOfIngrediaents(noOfIngredients);
+        recipe.setCategoryOfFood(categoryOfFood);
+        recipe.setDescription(description);
+        recipe.setImage(Image);
+        
+        this.recipeList.add(recipe);
+        return recipe;
+    }
+    
+    public Recipe findRecipe(String recTitle){
+        for(Recipe rec:this.recipeList){
+            if(rec.getRecipeTitle()==recTitle){
+                return rec;
+            }
+        }
+        return null;
+    }
 }

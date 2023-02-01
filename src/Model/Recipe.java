@@ -13,7 +13,7 @@ public class Recipe {
     int noOfServing;
     boolean isGlutenFree;
     double difficultyLevel;
-    int noOfIngrediaents;
+    int noOfIngredients;
     String categoryOfFood;
     String description;
     String Image; 
@@ -38,7 +38,7 @@ public class Recipe {
     }
 
     public void setNoOfIngrediaents(int noOfIngrediaents) {
-        this.noOfIngrediaents = noOfIngrediaents;
+        this.noOfIngredients = noOfIngrediaents;
     }
 
     public void setCategoryOfFood(String categoryOfFood) {
@@ -70,7 +70,7 @@ public class Recipe {
     }
 
     public int getNoOfIngrediaents() {
-        return noOfIngrediaents;
+        return noOfIngredients;
     }
 
     public String getCategoryOfFood() {

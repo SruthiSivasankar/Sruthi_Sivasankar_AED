@@ -39,7 +39,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        controlJpanel.setBackground(new java.awt.Color(204, 204, 255));
+        controlJpanel.setBackground(new java.awt.Color(153, 153, 255));
 
         btnCreate.setBackground(new java.awt.Color(102, 0, 102));
         btnCreate.setForeground(new java.awt.Color(255, 255, 255));
@@ -73,7 +73,7 @@ public class MainJFrame extends javax.swing.JFrame {
         controlJpanelLayout.setHorizontalGroup(
             controlJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlJpanelLayout.createSequentialGroup()
-                .addContainerGap(424, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(controlJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnUpdate)

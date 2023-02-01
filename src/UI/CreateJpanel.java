@@ -5,6 +5,8 @@
 package UI;
 
 import Model.User;
+import Model.Contact;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +18,8 @@ public class CreateJpanel extends javax.swing.JPanel {
      * Creates new form CreateJpanel
      */
     private User user;
+    private Boolean validate = false;
+    
     public CreateJpanel() {
         initComponents();
     }
@@ -35,6 +39,7 @@ public class CreateJpanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -54,12 +59,25 @@ public class CreateJpanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         recipeTitleTxtField = new javax.swing.JTextField();
-        servingsTxtField = new javax.swing.JTextField();
-        glutenTxtField = new javax.swing.JTextField();
         difficultyTxtField = new javax.swing.JTextField();
+        servingSpinner = new javax.swing.JSpinner();
+        btnGlutenYes = new javax.swing.JRadioButton();
+        btnGlutenNo = new javax.swing.JRadioButton();
+        jLabel13 = new javax.swing.JLabel();
+        ingredientSpinner = new javax.swing.JSpinner();
+        jLabel14 = new javax.swing.JLabel();
+        categoryTxtField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        descTxtField = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        imageTxtField = new javax.swing.JTextField();
+        btnSaveRecipe = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 204, 204));
+        jTextField1.setText("jTextField1");
 
+        setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel1.setText("About Chef:");
 
         jLabel2.setText("First Name:");
@@ -68,46 +86,62 @@ public class CreateJpanel extends javax.swing.JPanel {
 
         jLabel4.setText("Username:");
 
-        FrstNameTxtField.setText("jTextField1");
+        FrstNameTxtField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         FrstNameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FrstNameTxtFieldActionPerformed(evt);
             }
         });
 
-        LastNameTxtField.setText("jTextField1");
-
-        UserNameTxtField.setText("jTextField1");
-
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel5.setText("Contact:");
 
         jLabel6.setText("Email ID:");
 
         jLabel7.setText("Phone No:");
 
-        mailIdTxtField.setText("jTextField1");
-
-        phoneTxtField.setText("jTextField1");
-
+        btnSave.setBackground(new java.awt.Color(204, 51, 0));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("SAVE");
+        btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel8.setText("Recipe:");
 
         jLabel9.setText("Recipe Name:");
 
         jLabel10.setText("No. of Servings:");
 
-        jLabel11.setText("Gluten:");
+        jLabel11.setText("Gluten Free:");
 
         jLabel12.setText("Difficulty level:");
 
-        recipeTitleTxtField.setText("jTextField1");
+        btnGlutenYes.setText("Yes");
 
-        servingsTxtField.setText("jTextField1");
+        btnGlutenNo.setText("No");
 
-        glutenTxtField.setText("jTextField1");
+        jLabel13.setText("No. of Ingredients:");
 
-        difficultyTxtField.setText("jTextField1");
+        jLabel14.setText("Category:");
+
+        jLabel15.setText("Description:");
+
+        jLabel16.setText("Image:");
+
+        btnSaveRecipe.setBackground(new java.awt.Color(204, 51, 0));
+        btnSaveRecipe.setForeground(new java.awt.Color(255, 255, 255));
+        btnSaveRecipe.setText("SAVE RECIPE");
+        btnSaveRecipe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSaveRecipe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveRecipeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,39 +165,48 @@ public class CreateJpanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LastNameTxtField)
                                     .addComponent(UserNameTxtField))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(mailIdTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSave)
-                                .addGap(48, 48, 48))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(mailIdTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(recipeTitleTxtField)
+                            .addComponent(difficultyTxtField)
+                            .addComponent(servingSpinner)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(recipeTitleTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                    .addComponent(servingsTxtField)
-                                    .addComponent(glutenTxtField)
-                                    .addComponent(difficultyTxtField))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(btnGlutenYes)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGlutenNo))
+                            .addComponent(ingredientSpinner)
+                            .addComponent(categoryTxtField)
+                            .addComponent(descTxtField)
+                            .addComponent(imageTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addComponent(btnSaveRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,19 +238,44 @@ public class CreateJpanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(recipeTitleTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(servingsTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(servingSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(glutenTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(btnGlutenYes)
+                    .addComponent(btnGlutenNo))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(difficultyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(ingredientSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(categoryTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(descTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
+                        .addGap(95, 95, 95))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSaveRecipe))
+                            .addComponent(imageTxtField))
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -215,18 +283,57 @@ public class CreateJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_FrstNameTxtFieldActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String firstName = FrstNameTxtField.getText();
+        String lastName = LastNameTxtField.getText();
+        String userName=UserNameTxtField.getText();
+        
+        String mailId = mailIdTxtField.getText();
+        String phoneNo = phoneTxtField.getText();
+        
+        this.user.setChefFirstName(firstName);
+        this.user.setChefLastName(lastName);
+        this.user.setUserName(userName);
+        
+        Contact contact=this.user.getContact();
+        contact.setEmailId(mailId);
+        contact.setPhoneNo(phoneNo);
+        
+        if(validate) {
+            JOptionPane.showMessageDialog(null, "Please fill all fields");
+        } else {
+            JOptionPane.showMessageDialog(null, "Saved!");
+        }
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnSaveRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRecipeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveRecipeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField FrstNameTxtField;
     private javax.swing.JTextField LastNameTxtField;
     private javax.swing.JTextField UserNameTxtField;
+    private javax.swing.JRadioButton btnGlutenNo;
+    private javax.swing.JRadioButton btnGlutenYes;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSaveRecipe;
+    private javax.swing.JTextField categoryTxtField;
+    private javax.swing.JTextField descTxtField;
     private javax.swing.JTextField difficultyTxtField;
-    private javax.swing.JTextField glutenTxtField;
+    private javax.swing.JTextField imageTxtField;
+    private javax.swing.JSpinner ingredientSpinner;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -235,9 +342,10 @@ public class CreateJpanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField mailIdTxtField;
     private javax.swing.JTextField phoneTxtField;
     private javax.swing.JTextField recipeTitleTxtField;
-    private javax.swing.JTextField servingsTxtField;
+    private javax.swing.JSpinner servingSpinner;
     // End of variables declaration//GEN-END:variables
 }
