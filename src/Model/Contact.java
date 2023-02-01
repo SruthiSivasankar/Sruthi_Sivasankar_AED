@@ -10,7 +10,7 @@ package Model;
  */
 public class Contact {
     String emailId;
-    String phoneNo;
+    long phoneNo;
     
     public Contact(){
     }
@@ -19,14 +19,14 @@ public class Contact {
         return emailId;
     }
 
-    public String getPhoneNo() {
+    public long getPhoneNo() {
         return phoneNo;
     }
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
 
-    public void setPhoneNo(String phoneNo) {
+    public void setPhoneNo(long phoneNo) {
         this.phoneNo = phoneNo;
     }
         

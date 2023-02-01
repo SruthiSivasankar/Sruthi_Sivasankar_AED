@@ -6,7 +6,15 @@ package UI;
 
 import Model.User;
 import Model.Contact;
+import Model.Recipe;
+import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -18,7 +26,7 @@ public class CreateJpanel extends javax.swing.JPanel {
      * Creates new form CreateJpanel
      */
     private User user;
-    private Boolean validate = false;
+//    private Boolean validate = false;
     
     public CreateJpanel() {
         initComponents();
@@ -40,6 +48,7 @@ public class CreateJpanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
+        btngrpgluten = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -70,8 +79,12 @@ public class CreateJpanel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         descTxtField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        imageTxtField = new javax.swing.JTextField();
+        imagePathTxt = new javax.swing.JTextField();
         btnSaveRecipe = new javax.swing.JButton();
+        imageLabel = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
+        btnCheck = new javax.swing.JButton();
+        txtgluten = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -93,12 +106,36 @@ public class CreateJpanel extends javax.swing.JPanel {
             }
         });
 
+        LastNameTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LastNameTxtFieldActionPerformed(evt);
+            }
+        });
+
+        UserNameTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserNameTxtFieldActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel5.setText("Contact:");
 
         jLabel6.setText("Email ID:");
 
         jLabel7.setText("Phone No:");
+
+        mailIdTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mailIdTxtFieldActionPerformed(evt);
+            }
+        });
+
+        phoneTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneTxtFieldActionPerformed(evt);
+            }
+        });
 
         btnSave.setBackground(new java.awt.Color(204, 51, 0));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,9 +158,21 @@ public class CreateJpanel extends javax.swing.JPanel {
 
         jLabel12.setText("Difficulty level:");
 
+        btngrpgluten.add(btnGlutenYes);
         btnGlutenYes.setText("Yes");
+        btnGlutenYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGlutenYesActionPerformed(evt);
+            }
+        });
 
+        btngrpgluten.add(btnGlutenNo);
         btnGlutenNo.setText("No");
+        btnGlutenNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGlutenNoActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("No. of Ingredients:");
 
@@ -133,6 +182,12 @@ public class CreateJpanel extends javax.swing.JPanel {
 
         jLabel16.setText("Image:");
 
+        imagePathTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imagePathTxtActionPerformed(evt);
+            }
+        });
+
         btnSaveRecipe.setBackground(new java.awt.Color(204, 51, 0));
         btnSaveRecipe.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveRecipe.setText("SAVE RECIPE");
@@ -140,6 +195,32 @@ public class CreateJpanel extends javax.swing.JPanel {
         btnSaveRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveRecipeActionPerformed(evt);
+            }
+        });
+
+        imageLabel.setText("jLabel17");
+        imageLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnSearch.setBackground(new java.awt.Color(153, 153, 153));
+        btnSearch.setText("SEARCH");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnCheck.setBackground(new java.awt.Color(153, 153, 153));
+        btnCheck.setText("SUBMIT");
+        btnCheck.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
+
+        txtgluten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtglutenActionPerformed(evt);
             }
         });
 
@@ -165,22 +246,26 @@ public class CreateJpanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LastNameTxtField)
                                     .addComponent(UserNameTxtField))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(mailIdTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(mailIdTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnSearch)
+                                            .addComponent(btnSaveRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                    .addComponent(jLabel8)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -192,21 +277,23 @@ public class CreateJpanel extends javax.swing.JPanel {
                             .addComponent(jLabel15)
                             .addComponent(jLabel16))
                         .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(recipeTitleTxtField)
-                            .addComponent(difficultyTxtField)
-                            .addComponent(servingSpinner)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGlutenYes)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGlutenNo))
-                            .addComponent(ingredientSpinner)
-                            .addComponent(categoryTxtField)
-                            .addComponent(descTxtField)
-                            .addComponent(imageTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                        .addComponent(btnSaveRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(recipeTitleTxtField)
+                                .addComponent(difficultyTxtField)
+                                .addComponent(servingSpinner)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtgluten, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnGlutenNo)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnGlutenYes))
+                                .addComponent(ingredientSpinner)
+                                .addComponent(categoryTxtField)
+                                .addComponent(descTxtField)
+                                .addComponent(imagePathTxt)))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,8 +333,10 @@ public class CreateJpanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(btnGlutenYes)
-                    .addComponent(btnGlutenNo))
-                .addGap(10, 10, 10)
+                    .addComponent(btnGlutenNo)
+                    .addComponent(btnCheck)
+                    .addComponent(txtgluten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(difficultyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,22 +354,28 @@ public class CreateJpanel extends javax.swing.JPanel {
                     .addComponent(descTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addGap(95, 95, 95))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnSaveRecipe))
-                            .addComponent(imageTxtField))
-                        .addContainerGap())))
+                    .addComponent(jLabel16)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSaveRecipe)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(imagePathTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSearch))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void FrstNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrstNameTxtFieldActionPerformed
         // TODO add your handling code here:
+        String mn=FrstNameTxtField.getText();
+         if(Pattern.matches("[a-zA-Z]+", mn)){
+           FrstNameTxtField.setBackground(Color.green);
+       } 
+       else{
+             FrstNameTxtField.setBackground(Color.red);
+       }
     }//GEN-LAST:event_FrstNameTxtFieldActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -290,41 +385,209 @@ public class CreateJpanel extends javax.swing.JPanel {
         String userName=UserNameTxtField.getText();
         
         String mailId = mailIdTxtField.getText();
-        String phoneNo = phoneTxtField.getText();
+        long phoneNo = Long.parseLong(phoneTxtField.getText());
         
+        
+        if(FrstNameTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "First Name cannot be empty");
+        } 
+        else if(LastNameTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Last Name cannot be empty");
+        }
+        else if(UserNameTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "User Name cannot be empty");
+        }
+        else if(mailIdTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Email ID cannot be empty");
+        }
+        else if(phoneTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Phone Number cannot be empty");
+        }
+        else{
         this.user.setChefFirstName(firstName);
         this.user.setChefLastName(lastName);
         this.user.setUserName(userName);
-        
+   
         Contact contact=this.user.getContact();
         contact.setEmailId(mailId);
         contact.setPhoneNo(phoneNo);
         
-        if(validate) {
-            JOptionPane.showMessageDialog(null, "Please fill all fields");
-        } else {
-            JOptionPane.showMessageDialog(null, "Saved!");
+        JOptionPane.showMessageDialog(null, "Chef's Detail Saved");
+            
         }
+
+
+
         
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSaveRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRecipeActionPerformed
         // TODO add your handling code here:
+        String recipeName=recipeTitleTxtField.getText();
+        int servings=(Integer)servingSpinner.getValue();
+        double difficulty=Double.parseDouble(difficultyTxtField.getText());
+        int ingredients=(Integer)ingredientSpinner.getValue();
+        String category=categoryTxtField.getText();
+        String description=descTxtField.getText();
+        String Image=imagePathTxt.getText();
+        Boolean gluten=false;
+        if(txtgluten.getText().equals("Yes")){
+            gluten=true;
+        }
+        
+        
+        
+        if(recipeTitleTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Recipe Name cannot be empty");
+        } 
+        else if(servingSpinner.getValue().equals("")) {
+            JOptionPane.showMessageDialog(null, "No.of Servings has to be specified");
+        }
+        else if(difficultyTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Difficulty level has to be specified");
+        }
+        else if(ingredientSpinner.getValue().equals("")) {
+            JOptionPane.showMessageDialog(null, "No.of Ingredients has to be specified");
+        }
+        else if(categoryTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Category cannot be empty");
+        }
+        else if(descTxtField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Description cannot be empty");
+        }
+         else if (imagePathTxt.getText().equals("")){
+            JOptionPane.showMessageDialog(null," Add Image");
+        }
+         else{
+             Recipe recipe=this.user.createRecipe(recipeName, servings, gluten, difficulty, ingredients, category, description, Image);
+             JOptionPane.showMessageDialog(null, "Added Recipe");
+         }
+        
+        
+                
     }//GEN-LAST:event_btnSaveRecipeActionPerformed
+
+    private void btnGlutenYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGlutenYesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGlutenYesActionPerformed
+
+    private void btnGlutenNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGlutenNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGlutenNoActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        FileNameExtensionFilter fnef= new FileNameExtensionFilter("IMAGES","png","jpg","jpeg");
+        JFileChooser browseImageFile= new JFileChooser();
+        int showOpenDialogue = browseImageFile.showOpenDialog(null);
+        if(showOpenDialogue==JFileChooser.APPROVE_OPTION){
+            File selectedImageFile= browseImageFile.getSelectedFile();
+            String selectedImagePath= selectedImageFile.getAbsolutePath();
+            
+            imagePathTxt.setText(selectedImagePath);
+            
+            JOptionPane.showMessageDialog(null,selectedImagePath );
+            
+            ImageIcon i1=new ImageIcon(selectedImagePath);
+           
+            Image image=i1.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(image));
+            
+            
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void LastNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastNameTxtFieldActionPerformed
+        // TODO add your handling code here:
+        String mn=LastNameTxtField.getText();
+         if(Pattern.matches("[a-zA-Z]+", mn)){
+           LastNameTxtField.setBackground(Color.green);
+       } 
+       else{
+            LastNameTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_LastNameTxtFieldActionPerformed
+
+    private void UserNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTxtFieldActionPerformed
+        // TODO add your handling code here:
+//        String username = UserNameTxtField.getText();
+//if (Pattern.matches("[a-zA-Z0-9]+", username)) {
+//    // check if username is unique
+//    boolean isUnique = true;
+//    for (String existingUsername : existingUsernamesList) {
+//        if (existingUsername.equals(username)) {
+//            isUnique = false;
+//            break;
+//        }
+//    }
+//    if (isUnique) {
+//        UserNameTxtField.setBackground(Color.green);
+//    } else {
+//        UserNameTxtField.setBackground(Color.red);
+//    }
+//} else {
+//    UserNameTxtField.setBackground(Color.red);
+//}
+    }//GEN-LAST:event_UserNameTxtFieldActionPerformed
+
+    private void mailIdTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailIdTxtFieldActionPerformed
+        // TODO add your handling code here:
+        String e=mailIdTxtField.getText();
+        if(e.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+             mailIdTxtField.setBackground(Color.green);
+        }
+        else{
+             mailIdTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_mailIdTxtFieldActionPerformed
+
+    private void phoneTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTxtFieldActionPerformed
+        // TODO add your handling code here:
+        String mn=phoneTxtField.getText();
+        
+       if(mn.matches("^[0-9 ]*$")&& mn.length()==10){
+           phoneTxtField.setBackground(Color.green);
+       } 
+       else{
+             phoneTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_phoneTxtFieldActionPerformed
+
+    private void txtglutenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtglutenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtglutenActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        // TODO add your handling code here:
+        if(btnGlutenNo.isSelected()==true){
+            txtgluten.setText("No");
+        }
+        else{
+            txtgluten.setText("Yes");
+        }
+    }//GEN-LAST:event_btnCheckActionPerformed
+
+    private void imagePathTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagePathTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imagePathTxtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField FrstNameTxtField;
     private javax.swing.JTextField LastNameTxtField;
     private javax.swing.JTextField UserNameTxtField;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JRadioButton btnGlutenNo;
     private javax.swing.JRadioButton btnGlutenYes;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveRecipe;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.ButtonGroup btngrpgluten;
     private javax.swing.JTextField categoryTxtField;
     private javax.swing.JTextField descTxtField;
     private javax.swing.JTextField difficultyTxtField;
-    private javax.swing.JTextField imageTxtField;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JTextField imagePathTxt;
     private javax.swing.JSpinner ingredientSpinner;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -347,5 +610,6 @@ public class CreateJpanel extends javax.swing.JPanel {
     private javax.swing.JTextField phoneTxtField;
     private javax.swing.JTextField recipeTitleTxtField;
     private javax.swing.JSpinner servingSpinner;
+    private javax.swing.JTextField txtgluten;
     // End of variables declaration//GEN-END:variables
 }
