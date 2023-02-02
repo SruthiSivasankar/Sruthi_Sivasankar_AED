@@ -17,7 +17,7 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private User user;
-    ArrayList<String>existingUserName;
+    ArrayList<String> existingUserName;
     public MainJFrame() {
         initComponents();
         

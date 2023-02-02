@@ -404,7 +404,7 @@ public class CreateJpanel extends javax.swing.JPanel {
         String firstName = FrstNameTxtField.getText();
         String lastName = LastNameTxtField.getText();
         String userName=UserNameTxtField.getText();
-        
+        existingUserName.add(userName);
         String mailId = mailIdTxtField.getText();
         long phoneNo = Long.parseLong(phoneTxtField.getText());
         
