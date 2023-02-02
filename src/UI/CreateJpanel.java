@@ -198,7 +198,6 @@ public class CreateJpanel extends javax.swing.JPanel {
             }
         });
 
-        imageLabel.setText("jLabel17");
         imageLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnSearch.setBackground(new java.awt.Color(153, 153, 153));

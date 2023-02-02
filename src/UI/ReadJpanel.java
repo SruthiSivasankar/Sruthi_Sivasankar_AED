@@ -7,6 +7,8 @@ package UI;
 import Model.Contact;
 import Model.Recipe;
 import Model.User;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,11 +28,11 @@ public class ReadJpanel extends javax.swing.JPanel {
     ReadJpanel(User user){
         initComponents();
         this.user= user;
-        display();
+        displayTable();
         
     }
     
-    public void display(){
+    public void displayTable(){
         FrstNameTxtField.setText(String.valueOf(this.user.getChefFirstName()));
         LastNameTxtField.setText(String.valueOf(this.user.getChefLastName()));
         UserNameTxtField.setText(String.valueOf(this.user.getUserName()));
@@ -38,6 +40,23 @@ public class ReadJpanel extends javax.swing.JPanel {
         Contact contact = this.user.getContact();
         mailIdTxtField.setText(String.valueOf(contact.getEmailId()));
         phoneTxtField.setText(String.valueOf(contact.getPhoneNo()));
+        
+        DefaultTableModel model=(DefaultTableModel)recipeTable.getModel();
+        model.setRowCount(0);
+        for(Recipe r:user.getRecipeList()){
+            Object[]row=new Object[12];
+            row[0]=r;
+            row[1]=r.getRecipeTitle();
+            row[2]=r.getNoOfServing();
+            row[3]=r.isIsGlutenFree();
+            row[4]=r.getDifficultyLevel();
+            row[5]=r.getNoOfIngrediaents();
+            row[6]=r.getCategoryOfFood();
+            row[7]=r.getDescription();
+            row[8]=r.getImage();
+            model.addRow(row);
+            
+        }
         
 //        Recipe recipe=this.user.getRecipeList();
 //        recipeTitleTxtField.setText(String.valueOf(recipe.getRecipeTitle()));
@@ -57,7 +76,7 @@ public class ReadJpanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        recipeTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -92,26 +111,27 @@ public class ReadJpanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 255));
 
-        jTable1.setAutoCreateColumnsFromModel(false);
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        recipeTable.setAutoCreateRowSorter(true);
+        recipeTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        recipeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Recipe Name", "Category"
+                "Recipe Name", "No.of Servings", "Gluten free", "Difficulty level", "No.of Ingredients", "Category", "Description", "Image"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        recipeTable.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(recipeTable);
+        recipeTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel2.setText("First Name:");
 
@@ -184,9 +204,6 @@ public class ReadJpanel extends javax.swing.JPanel {
                 .addGap(91, 91, 91)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,35 +229,37 @@ public class ReadJpanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(mailIdTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(phoneTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(167, 167, 167)
+                                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(141, 141, 141)
-                                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel16)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jLabel15))
-                                        .addGap(53, 53, 53)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(recipeTitleTxtField)
-                                            .addComponent(difficultyTxtField)
-                                            .addComponent(categoryTxtField)
-                                            .addComponent(descTxtField)
-                                            .addComponent(imageTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                            .addComponent(servingsTxtField)
-                                            .addComponent(glutenTxtField)
-                                            .addComponent(ingredientsTxtField))))))
-                        .addGap(134, 184, Short.MAX_VALUE))))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel9))
+                                .addGap(53, 53, 53)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(recipeTitleTxtField)
+                                    .addComponent(difficultyTxtField)
+                                    .addComponent(categoryTxtField)
+                                    .addComponent(descTxtField)
+                                    .addComponent(imageTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                    .addComponent(servingsTxtField)
+                                    .addComponent(glutenTxtField)
+                                    .addComponent(ingredientsTxtField))))
+                        .addContainerGap(858, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,9 +286,9 @@ public class ReadJpanel extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnView))
@@ -351,9 +370,9 @@ public class ReadJpanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField mailIdTxtField;
     private javax.swing.JTextField phoneTxtField;
+    private javax.swing.JTable recipeTable;
     private javax.swing.JTextField recipeTitleTxtField;
     private javax.swing.JTextField servingsTxtField;
     // End of variables declaration//GEN-END:variables
