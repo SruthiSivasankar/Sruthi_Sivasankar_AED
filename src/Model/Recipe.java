@@ -84,4 +84,8 @@ public class Recipe {
     public String getImage() {
         return Image;
     }
+    @Override
+        public String toString(){
+        return recipeTitle;
+    }
 }

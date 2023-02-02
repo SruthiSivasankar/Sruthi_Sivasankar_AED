@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,16 +27,19 @@ public class CreateJpanel extends javax.swing.JPanel {
      * Creates new form CreateJpanel
      */
     private User user;
+    private ArrayList<String>existingUserName;
+    
 //    private Boolean validate = false;
     
     public CreateJpanel() {
         initComponents();
     }
 
-    CreateJpanel(User user){
+    CreateJpanel(User user, ArrayList existingUserName){
         initComponents();
         
         this.user = user;
+        this.existingUserName=existingUserName;
     }
 
     /**
@@ -105,16 +109,31 @@ public class CreateJpanel extends javax.swing.JPanel {
                 FrstNameTxtFieldActionPerformed(evt);
             }
         });
+        FrstNameTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FrstNameTxtFieldKeyReleased(evt);
+            }
+        });
 
         LastNameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LastNameTxtFieldActionPerformed(evt);
             }
         });
+        LastNameTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                LastNameTxtFieldKeyReleased(evt);
+            }
+        });
 
         UserNameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UserNameTxtFieldActionPerformed(evt);
+            }
+        });
+        UserNameTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                UserNameTxtFieldKeyReleased(evt);
             }
         });
 
@@ -130,10 +149,20 @@ public class CreateJpanel extends javax.swing.JPanel {
                 mailIdTxtFieldActionPerformed(evt);
             }
         });
+        mailIdTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mailIdTxtFieldKeyReleased(evt);
+            }
+        });
 
         phoneTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneTxtFieldActionPerformed(evt);
+            }
+        });
+        phoneTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                phoneTxtFieldKeyReleased(evt);
             }
         });
 
@@ -368,13 +397,6 @@ public class CreateJpanel extends javax.swing.JPanel {
 
     private void FrstNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrstNameTxtFieldActionPerformed
         // TODO add your handling code here:
-        String mn=FrstNameTxtField.getText();
-         if(Pattern.matches("[a-zA-Z]+", mn)){
-           FrstNameTxtField.setBackground(Color.green);
-       } 
-       else{
-             FrstNameTxtField.setBackground(Color.red);
-       }
     }//GEN-LAST:event_FrstNameTxtFieldActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -498,58 +520,19 @@ public class CreateJpanel extends javax.swing.JPanel {
 
     private void LastNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastNameTxtFieldActionPerformed
         // TODO add your handling code here:
-        String mn=LastNameTxtField.getText();
-         if(Pattern.matches("[a-zA-Z]+", mn)){
-           LastNameTxtField.setBackground(Color.green);
-       } 
-       else{
-            LastNameTxtField.setBackground(Color.red);
-       }
     }//GEN-LAST:event_LastNameTxtFieldActionPerformed
 
     private void UserNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTxtFieldActionPerformed
         // TODO add your handling code here:
-//        String username = UserNameTxtField.getText();
-//if (Pattern.matches("[a-zA-Z0-9]+", username)) {
-//    // check if username is unique
-//    boolean isUnique = true;
-//    for (String existingUsername : existingUsernamesList) {
-//        if (existingUsername.equals(username)) {
-//            isUnique = false;
-//            break;
-//        }
-//    }
-//    if (isUnique) {
-//        UserNameTxtField.setBackground(Color.green);
-//    } else {
-//        UserNameTxtField.setBackground(Color.red);
-//    }
-//} else {
-//    UserNameTxtField.setBackground(Color.red);
-//}
     }//GEN-LAST:event_UserNameTxtFieldActionPerformed
 
     private void mailIdTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailIdTxtFieldActionPerformed
         // TODO add your handling code here:
-        String e=mailIdTxtField.getText();
-        if(e.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
-             mailIdTxtField.setBackground(Color.green);
-        }
-        else{
-             mailIdTxtField.setBackground(Color.red);
-       }
+        
     }//GEN-LAST:event_mailIdTxtFieldActionPerformed
 
     private void phoneTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTxtFieldActionPerformed
         // TODO add your handling code here:
-        String mn=phoneTxtField.getText();
-        
-       if(mn.matches("^[0-9 ]*$")&& mn.length()==10){
-           phoneTxtField.setBackground(Color.green);
-       } 
-       else{
-             phoneTxtField.setBackground(Color.red);
-       }
     }//GEN-LAST:event_phoneTxtFieldActionPerformed
 
     private void txtglutenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtglutenActionPerformed
@@ -569,6 +552,63 @@ public class CreateJpanel extends javax.swing.JPanel {
     private void imagePathTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagePathTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_imagePathTxtActionPerformed
+
+    private void mailIdTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mailIdTxtFieldKeyReleased
+        // TODO add your handling code here:
+        String e=mailIdTxtField.getText();
+        if(e.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+             mailIdTxtField.setBackground(Color.green);
+        }
+        else{
+             mailIdTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_mailIdTxtFieldKeyReleased
+
+    private void phoneTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneTxtFieldKeyReleased
+        // TODO add your handling code here:
+        String mn=phoneTxtField.getText();
+        
+       if(mn.matches("^[0-9 ]*$")&& mn.length()==10){
+           phoneTxtField.setBackground(Color.green);
+       } 
+       else{
+             phoneTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_phoneTxtFieldKeyReleased
+
+    private void UserNameTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserNameTxtFieldKeyReleased
+        // TODO add your handling code here:
+         for(String e : existingUserName){
+            if(e.equals(UserNameTxtField.getText())){
+                UserNameTxtField.setBackground(Color.red);
+            }
+            else{
+                UserNameTxtField.setBackground(Color.green);
+            }
+        }
+    }//GEN-LAST:event_UserNameTxtFieldKeyReleased
+
+    private void LastNameTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LastNameTxtFieldKeyReleased
+        // TODO add your handling code here:
+        String mn=LastNameTxtField.getText();
+         if(Pattern.matches("[a-zA-Z]+", mn)){
+           LastNameTxtField.setBackground(Color.green);
+       } 
+       else{
+            LastNameTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_LastNameTxtFieldKeyReleased
+
+    private void FrstNameTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FrstNameTxtFieldKeyReleased
+        // TODO add your handling code here:
+         String mn=FrstNameTxtField.getText();
+         if(Pattern.matches("[a-zA-Z]+", mn)){
+           FrstNameTxtField.setBackground(Color.green);
+       } 
+       else{
+             FrstNameTxtField.setBackground(Color.red);
+       }
+    }//GEN-LAST:event_FrstNameTxtFieldKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

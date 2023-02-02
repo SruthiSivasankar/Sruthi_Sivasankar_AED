@@ -326,6 +326,7 @@ public class UpdateJpanel extends javax.swing.JPanel {
         this.recipe.setDescription(descTxtField.getText());
         this.recipe.setImage(imagePathTxtField.getText());
         
+        
     }//GEN-LAST:event_btnUpdateRecipeActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
