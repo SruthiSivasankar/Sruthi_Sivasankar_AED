@@ -13,6 +13,5 @@ public class Pet {
     int petAge;
     String petGender;
     String petType;
-    String petbreed;
-    
+    String petbreed;   
 }

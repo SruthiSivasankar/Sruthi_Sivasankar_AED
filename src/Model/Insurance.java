@@ -9,5 +9,9 @@ package Model;
  * @author sruthisivasankar
  */
 public class Insurance {
+    String planId;
+    String planName;
+    double costPerMonth;
+    double costPerAnnum;
     
 }
