@@ -3,18 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI;
+import Model.Business;
 
 /**
  *
  * @author sruthisivasankar
  */
 public class MainJFrame extends javax.swing.JFrame {
+    private Business business;
 
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+        this.business =new Business();
     }
 
     /**
@@ -26,21 +29,117 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        applicationBtn = new javax.swing.JButton();
+        applicantBtn = new javax.swing.JButton();
+        assignBtn = new javax.swing.JButton();
+        InsuranceBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
+
+        applicationBtn.setText("APPLICATION");
+        applicationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applicationBtnActionPerformed(evt);
+            }
+        });
+
+        applicantBtn.setText("APPLICANT");
+        applicantBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applicantBtnActionPerformed(evt);
+            }
+        });
+
+        assignBtn.setText("ASSIGN");
+        assignBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignBtnActionPerformed(evt);
+            }
+        });
+
+        InsuranceBtn.setText("INSURANCE");
+        InsuranceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsuranceBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(applicationBtn)
+                    .addComponent(applicantBtn)
+                    .addComponent(InsuranceBtn)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(assignBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(applicationBtn)
+                .addGap(26, 26, 26)
+                .addComponent(applicantBtn)
+                .addGap(31, 31, 31)
+                .addComponent(InsuranceBtn)
+                .addGap(29, 29, 29)
+                .addComponent(assignBtn)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
+
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 294, Short.MAX_VALUE)
+        );
+
+        jSplitPane1.setRightComponent(jPanel2);
+
+        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void applicationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applicationBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new ApplicationJPanel(this.business.getApplicantDirectory()));
+    }//GEN-LAST:event_applicationBtnActionPerformed
+
+    private void applicantBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applicantBtnActionPerformed
+        // TODO add your handling code here:
+//        jSplitPane1.setRightComponent(new ApplicantJPanel(this.business));
+          jSplitPane1.setRightComponent(new ApplicantJPanel(this.business));
+    }//GEN-LAST:event_applicantBtnActionPerformed
+
+    private void InsuranceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsuranceBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new InsuranceJPanel(this.business.getInsuranceDirectory()));
+    }//GEN-LAST:event_InsuranceBtnActionPerformed
+
+    private void assignBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new AssignJPanel(this.business));
+    }//GEN-LAST:event_assignBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +177,12 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton InsuranceBtn;
+    private javax.swing.JButton applicantBtn;
+    private javax.swing.JButton applicationBtn;
+    private javax.swing.JButton assignBtn;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,32 @@ package Model;
  * @author sruthisivasankar
  */
 public class Vaccination {
-    String vaccineName;
-    boolean vaccinated;
+    private String vaccineName;
+    private boolean vaccinated;
+    
+    public Vaccination(){
+    }
+
+    public Vaccination(String vaccineName, boolean vaccinated) {
+        this.vaccineName = vaccineName;
+        this.vaccinated = vaccinated;
+    }
+
+    public String getVaccineName() {
+        return vaccineName;
+    }
+
+    public void setVaccineName(String vaccineName) {
+        this.vaccineName = vaccineName;
+    }
+
+    public boolean isVaccinated() {
+        return vaccinated;
+    }
+
+    public void setVaccinated(boolean vaccinated) {
+        this.vaccinated = vaccinated;
+    }
+    
     
 }
