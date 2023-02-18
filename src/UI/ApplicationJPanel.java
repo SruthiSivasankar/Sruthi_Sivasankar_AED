@@ -141,10 +141,7 @@ public class ApplicationJPanel extends javax.swing.JPanel {
 
         applicantTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "First Name", "Last Name", "Application ID", "Application Date"

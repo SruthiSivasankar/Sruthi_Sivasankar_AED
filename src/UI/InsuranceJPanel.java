@@ -4,17 +4,49 @@
  */
 package UI;
 
+import Model.Applicant;
+import Model.ApplicantDirectory;
+import Model.Business;
+import Model.Insurance;
+import Model.InsuranceDirectory;
+import Model.Pet;
+import Model.Vaccination;
+import static java.lang.Integer.parseInt;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author sruthisivasankar
  */
 public class InsuranceJPanel extends javax.swing.JPanel {
+    Business business;
+    InsuranceDirectory insuranceList;
 
     /**
      * Creates new form InsuranceJPanel
      */
-    public InsuranceJPanel() {
+    public InsuranceJPanel(InsuranceDirectory insuranceList) {
         initComponents();
+        this.business=business;
+        this.insuranceList=insuranceList;
+        populateInsuranceTable();
+    }
+    public void populateInsuranceTable(){
+           DefaultTableModel model= (DefaultTableModel )insuranceTbl.getModel();
+           // TableColumn insurancecolumn=model.getColumnModel.getColumn(5);
+            model.setRowCount(0);
+            
+        for(Insurance  io : insuranceList.getInsuranceList()){
+            Object[]row =new Object[4];
+            row[0]=io;
+            row[1]=io.getPlanName();
+            row[2]=io.getCostPerMonth();
+                    
+            row[3]=io.getCostPerAnnum();
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -87,10 +119,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 
         insuranceTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Plan ID", "Plan Name", "Cost For a Month", "Annum cost"
@@ -162,8 +191,8 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 
         DefaultTableModel model= (DefaultTableModel )insuranceTbl.getModel();
         int store=Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
-        for (Insurance a: insurancelist.getInsurancelist()){
-            if(a.getIid()==store){
+        for (Insurance a: insuranceList.getInsuranceList()){
+            if(a.getPlanId()==store){
                 model.setValueAt(IdLable.getText(),insuranceTbl.getSelectedRow() , 0);
                 model.setValueAt(nameField.getText(),insuranceTbl.getSelectedRow() , 1);
                 model.setValueAt(cpmField.getText(),insuranceTbl.getSelectedRow() , 2);
@@ -193,11 +222,11 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         else{
             int cpm=parseInt(cpmField.getText());
             Insurance insurance=new Insurance(pn,cpm);
-            insurancelist.getInsurancelist().add(insurance);
+            insuranceList.getInsuranceList().add(insurance);
             //      //  Insurance insurance= this.business.getInsurancedirectory().getInsurancelist().add(pn)newInsurance(pn, cpm);
             //       // System.out.println(insurance.toString());
-            IdLable.setText(String.valueOf(insurance.getIid()));
-            cpaLable.setText(String.valueOf(insurance.getCostAnnum()));
+            IdLable.setText(String.valueOf(insurance.getPlanId()));
+            cpaLable.setText(String.valueOf(insurance.getCostPerAnnum()));
             JOptionPane.showMessageDialog(null, "plan details added");
             IdLable.setText("");
             cpaLable.setText("");
@@ -207,13 +236,13 @@ public class InsuranceJPanel extends javax.swing.JPanel {
             // TableColumn insurancecolumn=model.getColumnModel.getColumn(5);
             model.setRowCount(0);
 
-            for(Insurance  io : insurancelist.getInsurancelist()){
+            for(Insurance  io : insuranceList.getInsuranceList()){
                 Object[]row =new Object[4];
                 row[0]=io;
-                row[1]=io.getPlanname();
-                row[2]=io.getCostmonth();
+                row[1]=io.getPlanName();
+                row[2]=io.getCostPerMonth();
 
-                row[3]=io.getCostAnnum();
+                row[3]=io.getCostPerAnnum();
 
                 model.addRow(row);
             }

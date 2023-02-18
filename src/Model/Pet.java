@@ -5,6 +5,7 @@
 package Model;
 import Model.Vaccination;
 import Model.Insurance;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,11 +17,11 @@ public class Pet {
     private String petGender;
     private String petType;
     private String petbreed;  
-    Vaccination vaccine;
+    ArrayList<Vaccination>vaccineList;
     Insurance insurance;
     
     public Pet(){
-         this.vaccine= new Vaccination();
+         this.vaccineList= new ArrayList<Vaccination>();
     }
 
     public Pet(String petName, int petAge, String petGender, String petType, String petbreed) {
@@ -29,6 +30,7 @@ public class Pet {
         this.petGender = petGender;
         this.petType = petType;
         this.petbreed = petbreed;
+        this.vaccineList= new ArrayList<Vaccination>();
        
         
     }
@@ -73,13 +75,13 @@ public class Pet {
         this.petbreed = petbreed;
     }
 
-    public Vaccination getVaccine() {
-        return vaccine;
+    public ArrayList<Vaccination> getVaccineList() {
+        return vaccineList;
     }
 
-    public void setVaccine(Vaccination vaccine) {
-        this.vaccine = vaccine;
-    }  
+    public void setVaccineList(ArrayList<Vaccination> vaccineList) {
+        this.vaccineList = vaccineList;
+    } 
 
     public Insurance getInsurance() {
         return insurance;
@@ -88,6 +90,11 @@ public class Pet {
     public void setInsurance(Insurance insurance) {
         this.insurance = insurance;
     }
+    public Vaccination addVaccine (String vaccineName, Boolean courseCompleted){
+       Vaccination v = new Vaccination(vaccineName, courseCompleted);
+       this.vaccineList.add(v);
+       return v;
+   }
     
     
 }

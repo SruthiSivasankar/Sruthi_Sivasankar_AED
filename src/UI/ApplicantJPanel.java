@@ -56,12 +56,15 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         DefaultTableModel model1= (DefaultTableModel )vaccineTbl.getModel();
                 model1.setRowCount(0);
         for(Applicant  io :this.business.getApplicantDirectory().getApplicantList()){
-            Object[]row =new Object[2];
-            row[0]=io.getPet().getVaccine().getVaccineName();
-            row[1]=io.getPet().getVaccine().isVaccinated();
-           
+            for(int i=0;i<io.getPet().getVaccineList().size();i++){
+            Object[]row =new Object[3];
+            row[0]=io.getPet().getVaccineList().get(i).getVaccineName();
+            
+            row[1]=io.getPet().getVaccineList().get(i).isVaccinated();
+            row[2]=io.getPet().getPetName();
             
             model1.addRow(row);
+            }
         }
     }
     public  void populateApplicantCB(){
@@ -122,6 +125,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         vaccineTbl = new javax.swing.JTable();
         updateVaccine = new javax.swing.JButton();
+        createVaccine = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -134,10 +138,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
 
         applicantTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "First Name", "Last Name", "ID", "Date"
@@ -145,12 +146,12 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(applicantTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 530, 150));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 530, 150));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel2.setText("SEARCH APPLICANT");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
-        add(searchNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 130, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        add(searchNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 130, -1));
 
         searchNameBtn.setText("Search by Name");
         searchNameBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +160,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
             }
         });
         add(searchNameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 130, -1));
-        add(searchIDfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 130, -1));
+        add(searchIDfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 130, -1));
 
         searchIDbtn.setText("Search by ID");
         searchIDbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -217,10 +218,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
 
         petTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Pet Name", "Pet Age", "Pet Gender", "Pet Breed", "Pet Type"
@@ -268,14 +266,11 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 createBtnActionPerformed(evt);
             }
         });
-        add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 920, -1, -1));
+        add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 530, -1, -1));
 
         vaccineTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Vaccination name", "Vaccinated?"
@@ -288,7 +283,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(vaccineTbl);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 760, -1, 130));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 700, -1, 130));
 
         updateVaccine.setText("UPDATE VACCINATION DETAILS");
         updateVaccine.addActionListener(new java.awt.event.ActionListener() {
@@ -296,7 +291,15 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 updateVaccineActionPerformed(evt);
             }
         });
-        add(updateVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 920, -1, -1));
+        add(updateVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 860, -1, -1));
+
+        createVaccine.setText("CREATE VACCINE");
+        createVaccine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createVaccineActionPerformed(evt);
+            }
+        });
+        add(createVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 860, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void genderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderBtnActionPerformed
@@ -328,17 +331,17 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         String breed=petBreedField.getText();
         int age=Integer.parseInt(petAgeField.getText());
         String gender=petGenderField.getText();
-        String vaccinename=vaccineNameField.getText();
-        Boolean vaccinated;
-        if(yesBtn.isSelected()==true){
-            vaccinated=true;
-        }
-        else{
-            vaccinated=false;
-        }
-        Vaccination vaccine=new Vaccination(vaccinename,vaccinated);
+//        String vaccinename=vaccineNameField.getText();
+//        Boolean vaccinated;
+//        if(yesBtn.isSelected()==true){
+//            vaccinated=true;
+//        }
+//        else{
+//            vaccinated=false;
+//        }
+//        Vaccination vaccine=new Vaccination(vaccinename,vaccinated);
         Pet pet=new Pet(petname,age,gender,type,breed);
-        pet.setVaccine(vaccine);
+//        pet.setVaccineList(vaccineList);
         applicant.setPet(pet);
         JOptionPane.showMessageDialog(null, "pet details added for applicant");
         
@@ -362,17 +365,17 @@ public class ApplicantJPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
-        DefaultTableModel model1= (DefaultTableModel )vaccineTbl.getModel();
-                model1.setRowCount(0);
-
-        for(Applicant  io :this.business.getApplicantDirectory().getApplicantList()){
-            Object[]row =new Object[2];
-            row[0]=io.getPet().getVaccine().getVaccineName();
-            row[1]=io.getPet().getVaccine().isVaccinated();
-           
-            
-            model1.addRow(row);
-        }
+//        DefaultTableModel model1= (DefaultTableModel )vaccineTbl.getModel();
+//                model1.setRowCount(0);
+//
+//        for(Applicant  io :this.business.getApplicantDirectory().getApplicantList()){
+//            Object[]row =new Object[2];
+//            row[0]=io.getPet().getVaccineList().get(i).getVaccineName();
+//            row[1]=io.getPet().getVaccineList().get(i).isVaccinated();
+//           
+//            
+//            model1.addRow(row);
+//        }
                                              
                                              
     }//GEN-LAST:event_createBtnActionPerformed
@@ -442,7 +445,8 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 DefaultTableModel model= (DefaultTableModel )vaccineTbl.getModel();
                 String store=model.getValueAt(selectedRowIndex, 0).toString();
                 for (Applicant a: this.business.getApplicantDirectory().getApplicantList()){
-                    if(a.getPet().getVaccine().getVaccineName().equals(store)){
+                    for (int i=0;i<a.getPet().getVaccineList().size();i++){
+                    if(a.getPet().getVaccineList().get(i).getVaccineName().equals(store)){
                        model.setValueAt(vaccineNameField.getText(),vaccineTbl.getSelectedRow() , 0);
                         if(yesBtn.isSelected()==true){
                                 model.setValueAt("Yes",vaccineTbl.getSelectedRow() , 1);
@@ -453,6 +457,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                         }
 
                     }
+                }
                 }
 
                 vaccineNameField.setText("");
@@ -518,11 +523,43 @@ public class ApplicantJPanel extends javax.swing.JPanel {
          }  
     }//GEN-LAST:event_vaccineTblMouseClicked
 
+    private void createVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVaccineActionPerformed
+        // TODO add your handling code here:
+        int aid=Integer.parseInt(applicantComboBox.getSelectedItem().toString());
+        
+        Applicant applicant=this.business.findApplicant(aid);
+         String vaccinename=vaccineNameField.getText();
+        Boolean vaccinated;
+        if(yesBtn.isSelected()==true){
+            vaccinated=true;
+        }
+        else{
+            vaccinated=false;
+        }
+        applicant.getPet().addVaccine(vaccinename, vaccinated);
+       
+        DefaultTableModel model1= (DefaultTableModel )vaccineTbl.getModel();
+                model1.setRowCount(0);
+
+        for(Applicant  io :this.business.getApplicantDirectory().getApplicantList()){
+            int size=io.getPet().getVaccineList().size();
+            for(int s=0; s<size ; s++){
+            Object[]row =new Object[3];
+            row[0]=io.getPet().getVaccineList().get(s).getVaccineName();
+            row[1]=io.getPet().getVaccineList().get(s).isVaccinated();
+            row[2]=io.getPet().getPetName();
+            
+            model1.addRow(row);
+            }
+        }
+    }//GEN-LAST:event_createVaccineActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox applicantComboBox;
     private javax.swing.JTable applicantTbl;
     private javax.swing.JButton createBtn;
+    private javax.swing.JButton createVaccine;
     private javax.swing.JRadioButton femaleBtn;
     private javax.swing.ButtonGroup gender;
     private javax.swing.JButton genderBtn;

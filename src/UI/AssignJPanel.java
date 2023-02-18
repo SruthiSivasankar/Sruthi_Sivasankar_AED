@@ -4,18 +4,76 @@
  */
 package UI;
 
+import Model.Applicant;
+import Model.ApplicantDirectory;
+import Model.Business;
+import Model.Insurance;
+import Model.InsuranceDirectory;
+import Model.Pet;
+import Model.Vaccination;
+import static java.lang.Integer.parseInt;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author sruthisivasankar
  */
 public class AssignJPanel extends javax.swing.JPanel {
+        Business business;
+        Insurance insurance;
+        Applicant applicant;
 
     /**
      * Creates new form AssignJPanel
-     */
-    public AssignJPanel() {
+     */      
+        
+    public AssignJPanel(Business business) {
         initComponents();
+        this.business=business;
+        populateTable();
+        populateInsuranceCB();
     }
+    public void populateTable(){
+            DefaultTableModel model= (DefaultTableModel )jTable1.getModel();
+           // TableColumn insurancecolumn=model.getColumnModel.getColumn(5);
+            model.setRowCount(0);
+            
+        for(Applicant  io : business.getApplicantDirectory().getApplicantList()){
+            for(int i=0;i<io.getPet().getVaccineList().size();i++){
+            Object[]row =new Object[11];
+           row[0]=io;
+            row[1]=io.getOwnerLastName();
+            row[2]=io.getApplicationId();
+            row[3]=io.getPet().getPetName();
+            row[4]=io.getPet().getPetAge();
+            row[5]=io.getPet().getPetGender();
+            row[6]=io.getPet().getPetType();
+            row[7]=io.getPet().getPetbreed();
+            row[8]=io.getPet().getVaccineList().get(i).getVaccineName();
+            row[9]=io.getPet().getVaccineList().get(i).isVaccinated();
+            
+            
+            model.addRow(row);
+        }
+        }
+                
+    }
+    public void populateInsuranceCB(){
+        for(Insurance i: this.business.getInsuranceDirectory().getInsuranceList()){
+           InsuranceCB.addItem(String.valueOf(i.getPlanId()));
+        }
+    }
+    private void search(String str){
+        DefaultTableModel model= (DefaultTableModel )jTable1.getModel();
+        TableRowSorter<DefaultTableModel> trs =new TableRowSorter<>(model);
+        jTable1.setRowSorter(trs);
+        trs.setRowFilter(RowFilter.regexFilter(str ));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,10 +98,7 @@ public class AssignJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "First Name", "Last Name", "ID", "Pet Name", "Pet Age", "Pet Gender", "Pet Type", "Pet Breed", "Vaccination Name", "Vaccinated?", "Insurance"
@@ -54,9 +109,20 @@ public class AssignJPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 880, 137));
 
         add(InsuranceCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 130, -1));
+
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchFieldKeyReleased(evt);
+            }
+        });
         add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 130, -1));
 
         assignBtn.setText("ASSIGN");
+        assignBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignBtnActionPerformed(evt);
+            }
+        });
         add(assignBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 130, -1));
 
         jLabel1.setText("Select the Insurance:");
@@ -69,6 +135,29 @@ public class AssignJPanel extends javax.swing.JPanel {
         jLabel3.setText("ASSIGN INSURANCE");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void assignBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignBtnActionPerformed
+        // TODO add your handling code here:
+         //get the insurance object from combobox
+        int iid=Integer.parseInt(InsuranceCB.getSelectedItem().toString());
+        //find the insurance object from business class
+        Insurance insurance=business.findInsurance(iid);
+                //getting the applicatiant object to set his pet insurance
+                int selectedRowIndex=jTable1.getSelectedRow();
+                int id=Integer.parseInt(jTable1.getValueAt(selectedRowIndex, 2).toString());
+                 Applicant applicant=this.business.findApplicant(id);
+                 this.applicant=applicant;
+                 applicant.getPet().setInsurance(insurance);
+        //setting the value of insurance to table
+                DefaultTableModel model= (DefaultTableModel )jTable1.getModel();
+                model.setValueAt(insurance.getPlanName(), selectedRowIndex, 10);
+    }//GEN-LAST:event_assignBtnActionPerformed
+
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+        // TODO add your handling code here:
+        String searchBar= searchField.getText();
+        search(searchBar);
+    }//GEN-LAST:event_searchFieldKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
