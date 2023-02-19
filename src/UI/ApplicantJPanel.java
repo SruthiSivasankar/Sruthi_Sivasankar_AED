@@ -273,7 +273,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Vaccination name", "Vaccinated?"
+                "Vaccination name", "Vaccinated?", "Pet Name"
             }
         ));
         vaccineTbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -315,7 +315,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
         if(petNameField.getText().equals("") || petAgeField.getText().equals("")||petGenderField.getText().equals("")||petTypeField.getText().equals("")||petBreedField.getText().equals("")
-               ||vaccineNameField.getText().equals("")){
+               ){
                 JOptionPane.showMessageDialog(null, "Enter all details");
    
        }
@@ -331,17 +331,8 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         String breed=petBreedField.getText();
         int age=Integer.parseInt(petAgeField.getText());
         String gender=petGenderField.getText();
-//        String vaccinename=vaccineNameField.getText();
-//        Boolean vaccinated;
-//        if(yesBtn.isSelected()==true){
-//            vaccinated=true;
-//        }
-//        else{
-//            vaccinated=false;
-//        }
-//        Vaccination vaccine=new Vaccination(vaccinename,vaccinated);
+
         Pet pet=new Pet(petname,age,gender,type,breed);
-//        pet.setVaccineList(vaccineList);
         applicant.setPet(pet);
         JOptionPane.showMessageDialog(null, "pet details added for applicant");
         
@@ -365,19 +356,8 @@ public class ApplicantJPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
-//        DefaultTableModel model1= (DefaultTableModel )vaccineTbl.getModel();
-//                model1.setRowCount(0);
-//
-//        for(Applicant  io :this.business.getApplicantDirectory().getApplicantList()){
-//            Object[]row =new Object[2];
-//            row[0]=io.getPet().getVaccineList().get(i).getVaccineName();
-//            row[1]=io.getPet().getVaccineList().get(i).isVaccinated();
-//           
-//            
-//            model1.addRow(row);
-//        }
                                              
-                                             
+                                           
     }//GEN-LAST:event_createBtnActionPerformed
 
     private void petTypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_petTypeFieldActionPerformed
@@ -518,13 +498,17 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         }
             
         
-        
-
          }  
     }//GEN-LAST:event_vaccineTblMouseClicked
 
     private void createVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVaccineActionPerformed
         // TODO add your handling code here:
+        
+         if(vaccineNameField.getText().equals("") 
+               ){
+                JOptionPane.showMessageDialog(null, "Enter all details");
+   
+       }
         int aid=Integer.parseInt(applicantComboBox.getSelectedItem().toString());
         
         Applicant applicant=this.business.findApplicant(aid);
@@ -548,6 +532,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
             row[0]=io.getPet().getVaccineList().get(s).getVaccineName();
             row[1]=io.getPet().getVaccineList().get(s).isVaccinated();
             row[2]=io.getPet().getPetName();
+            
             
             model1.addRow(row);
             }

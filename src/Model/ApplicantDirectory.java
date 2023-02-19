@@ -32,13 +32,12 @@ public class ApplicantDirectory {
         applicantList.add(newApplicant);
         return newApplicant;
     }
-    public void deleteApplicant(int id){
-        for(Applicant dl:this.applicantList){
-            if(dl.getApplicationId()==id){
-                this.applicantList.remove(dl);
-                break;
-            }
-        }
+   
+    
+    public void deleteInfo(Applicant io){
+        applicantList.remove(io);
+        
+        
     }
    
 }

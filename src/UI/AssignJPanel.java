@@ -39,7 +39,6 @@ public class AssignJPanel extends javax.swing.JPanel {
     }
     public void populateTable(){
             DefaultTableModel model= (DefaultTableModel )jTable1.getModel();
-           // TableColumn insurancecolumn=model.getColumnModel.getColumn(5);
             model.setRowCount(0);
             
         for(Applicant  io : business.getApplicantDirectory().getApplicantList()){

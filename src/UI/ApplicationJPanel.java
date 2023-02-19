@@ -73,6 +73,7 @@ public class ApplicationJPanel extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
+        deleteBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -168,6 +169,14 @@ public class ApplicationJPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel5.setText("REGISTER APPLICANT");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        deleteBtn.setText("DELETE");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void dateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateBtnActionPerformed
@@ -271,6 +280,29 @@ public class ApplicationJPanel extends javax.swing.JPanel {
         dateField.setText("");
     }//GEN-LAST:event_updateBtnActionPerformed
 
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex=applicantTbl.getSelectedRow();
+               DefaultTableModel model= (DefaultTableModel )applicantTbl.getModel();
+               int store=Integer.parseInt(model.getValueAt(selectedRowIndex, 2).toString());
+                 if (selectedRowIndex<0){
+          JOptionPane.showMessageDialog(this, "please select a row to delete");
+          return;
+      }
+        for (Applicant a:this.appliccantList.getApplicantList()){
+            if(a.getApplicationId()==store){
+           appliccantList.deleteInfo(a);
+            firstNameField.setText("");
+            lastNameField.setText("");
+            dateField.setText("");
+             jDateChooser1.setCalendar(null);
+             AppIDlbl.setText("");
+            }
+            populateApplicantTable();
+        }
+        
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AppIDlbl;
@@ -278,6 +310,7 @@ public class ApplicationJPanel extends javax.swing.JPanel {
     private javax.swing.JButton createBtn;
     private javax.swing.JButton dateBtn;
     private javax.swing.JTextField dateField;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField firstNameField;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
