@@ -220,7 +220,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "please enter all details ");
         }
         else{
-            int cpm=parseInt(cpmField.getText());
+            double cpm=Double.parseDouble(cpmField.getText());
             Insurance insurance=new Insurance(pn,cpm);
             insuranceList.getInsuranceList().add(insurance);
             //      //  Insurance insurance= this.business.getInsurancedirectory().getInsurancelist().add(pn)newInsurance(pn, cpm);

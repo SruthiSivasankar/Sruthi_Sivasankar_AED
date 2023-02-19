@@ -86,10 +86,8 @@ public class AssignJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         InsuranceCB = new javax.swing.JComboBox();
-        searchField = new javax.swing.JTextField();
         assignBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
@@ -109,26 +107,16 @@ public class AssignJPanel extends javax.swing.JPanel {
 
         add(InsuranceCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 130, -1));
 
-        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchFieldKeyReleased(evt);
-            }
-        });
-        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 130, -1));
-
         assignBtn.setText("ASSIGN");
         assignBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignBtnActionPerformed(evt);
             }
         });
-        add(assignBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 130, -1));
+        add(assignBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 130, -1));
 
         jLabel1.setText("Select the Insurance:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 130, -1));
-
-        jLabel2.setText("Search :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 15)); // NOI18N
         jLabel3.setText("ASSIGN INSURANCE");
@@ -143,6 +131,9 @@ public class AssignJPanel extends javax.swing.JPanel {
         Insurance insurance=business.findInsurance(iid);
                 //getting the applicatiant object to set his pet insurance
                 int selectedRowIndex=jTable1.getSelectedRow();
+                if (selectedRowIndex == -1 ){
+            JOptionPane.showMessageDialog(null, "Please select an applicant to delete");
+        }else {
                 int id=Integer.parseInt(jTable1.getValueAt(selectedRowIndex, 2).toString());
                  Applicant applicant=this.business.findApplicant(id);
                  this.applicant=applicant;
@@ -150,23 +141,16 @@ public class AssignJPanel extends javax.swing.JPanel {
         //setting the value of insurance to table
                 DefaultTableModel model= (DefaultTableModel )jTable1.getModel();
                 model.setValueAt(insurance.getPlanName(), selectedRowIndex, 10);
+                }
     }//GEN-LAST:event_assignBtnActionPerformed
-
-    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
-        // TODO add your handling code here:
-        String searchBar= searchField.getText();
-        search(searchBar);
-    }//GEN-LAST:event_searchFieldKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox InsuranceCB;
     private javax.swing.JButton assignBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
 }

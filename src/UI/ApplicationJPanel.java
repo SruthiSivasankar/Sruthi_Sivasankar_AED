@@ -261,9 +261,15 @@ public class ApplicationJPanel extends javax.swing.JPanel {
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex=applicantTbl.getSelectedRow();
+        if (selectedRowIndex == -1 ){
+            JOptionPane.showMessageDialog(null, "Please select an applicant to update");
+        }else {
 
         DefaultTableModel model= (DefaultTableModel )applicantTbl.getModel();
         int store=Integer.parseInt(model.getValueAt(selectedRowIndex, 2).toString());
+        if (AppIDlbl.getText().isEmpty() || firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || dateField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter all details to update.");
+            }else {
         for (Applicant a: appliccantList.getApplicantList()){
             if(a.getApplicationId()==store){
                 model.setValueAt(firstNameField.getText(),applicantTbl.getSelectedRow() , 0);
@@ -278,11 +284,16 @@ public class ApplicationJPanel extends javax.swing.JPanel {
         lastNameField.setText("");
         AppIDlbl.setText("");
         dateField.setText("");
+        }
+        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex=applicantTbl.getSelectedRow();
+        if (selectedRowIndex == -1 ){
+            JOptionPane.showMessageDialog(null, "Please select an applicant to delete");
+        }else {
                DefaultTableModel model= (DefaultTableModel )applicantTbl.getModel();
                int store=Integer.parseInt(model.getValueAt(selectedRowIndex, 2).toString());
                  if (selectedRowIndex<0){
@@ -300,7 +311,7 @@ public class ApplicationJPanel extends javax.swing.JPanel {
             }
             populateApplicantTable();
         }
-        
+      }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
 

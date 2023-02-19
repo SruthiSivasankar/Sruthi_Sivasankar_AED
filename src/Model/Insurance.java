@@ -9,11 +9,11 @@ package Model;
  * @author sruthisivasankar
  */
 public class Insurance {
-    public static int counter=89;
+    public static int counter=2000;
     private int planId;
     private String planName;
-    private int costPerMonth;
-    private int costPerAnnum;
+    private double costPerMonth;
+    private double costPerAnnum;
     
     public Insurance(){
     }
@@ -54,7 +54,7 @@ public class Insurance {
         this.planName = planName;
     }
 
-    public int getCostPerMonth() {
+    public double getCostPerMonth() {
         return costPerMonth;
     }
 
@@ -62,7 +62,7 @@ public class Insurance {
         this.costPerMonth = costPerMonth;
     }
 
-    public int getCostPerAnnum() {
+    public double getCostPerAnnum() {
         return costPerAnnum;
     }
     @Override

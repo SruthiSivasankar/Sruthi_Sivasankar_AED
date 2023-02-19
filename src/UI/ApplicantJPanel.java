@@ -221,7 +221,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Pet Name", "Pet Age", "Pet Gender", "Pet Breed", "Pet Type"
+                "Pet Name", "Pet Age", "Pet Gender", "Pet Breed", "Pet Type", "Owner Name"
             }
         ));
         petTbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -347,12 +347,13 @@ public class ApplicantJPanel extends javax.swing.JPanel {
         DefaultTableModel model= (DefaultTableModel )petTbl.getModel();
         model.setRowCount(0);
         for(Applicant  io :this.business.getApplicantDirectory().getApplicantList()){
-            Object[]row =new Object[5];
+            Object[]row =new Object[6];
             row[0]=io.getPet().getPetName();
             row[1]=io.getPet().getPetAge();
             row[2]=io.getPet().getPetGender();
             row[3]=io.getPet().getPetbreed();
             row[4]=io.getPet().getPetType();
+            row[5]=io.getOwnerFirstName();
             
             model.addRow(row);
         }
@@ -366,6 +367,9 @@ public class ApplicantJPanel extends javax.swing.JPanel {
 
     private void searchNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchNameBtnActionPerformed
         // TODO add your handling code here:
+        if (searchNameField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "please enter a name search");
+        } else {
         String store=searchNameField.getText();
         
         for (Applicant a: this.business.getApplicantDirectory().getApplicantList()){
@@ -392,11 +396,15 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 row[3]=applicant1.getApplicationDate();  
                 model.addRow(row);
            }
+        }
     }//GEN-LAST:event_searchNameBtnActionPerformed
 
     private void updatePetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePetActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex=petTbl.getSelectedRow();
+        if (selectedRowIndex == -1 ){
+            JOptionPane.showMessageDialog(null, "Please select a pet to update");
+        }else {
                
                 DefaultTableModel model= (DefaultTableModel )petTbl.getModel();
                 String store=model.getValueAt(selectedRowIndex, 0).toString();
@@ -416,12 +424,15 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 petGenderField.setText("");
                 petBreedField.setText("");
                 petTypeField.setText("");
+        }
     }//GEN-LAST:event_updatePetActionPerformed
 
     private void updateVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateVaccineActionPerformed
         // TODO add your handling code here:
          int selectedRowIndex=vaccineTbl.getSelectedRow();
-               
+               if (selectedRowIndex == -1 ){
+            JOptionPane.showMessageDialog(null, "Please select an vaccine to update");
+        }else {
                 DefaultTableModel model= (DefaultTableModel )vaccineTbl.getModel();
                 String store=model.getValueAt(selectedRowIndex, 0).toString();
                 for (Applicant a: this.business.getApplicantDirectory().getApplicantList()){
@@ -441,10 +452,14 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 }
 
                 vaccineNameField.setText("");
+               }
     }//GEN-LAST:event_updateVaccineActionPerformed
 
     private void searchIDbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchIDbtnActionPerformed
         // TODO add your handling code here:
+        if (searchIDfield.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "please enter a name search");
+        } else {
         int Storeid=Integer.parseInt(searchIDfield.getText());
         for (Applicant a: this.business.getApplicantDirectory().getApplicantList()){
             if (a.getApplicationId()==Storeid){
@@ -467,6 +482,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
                 row[3]=applicant1.getApplicationDate();  
                 model.addRow(row);
            }
+        }
     }//GEN-LAST:event_searchIDbtnActionPerformed
 
     private void petTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_petTblMouseClicked
@@ -503,12 +519,14 @@ public class ApplicantJPanel extends javax.swing.JPanel {
 
     private void createVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVaccineActionPerformed
         // TODO add your handling code here:
-        
+
+        DefaultTableModel model = (DefaultTableModel)petTbl.getModel(); 
          if(vaccineNameField.getText().equals("") 
                ){
                 JOptionPane.showMessageDialog(null, "Enter all details");
    
        }
+         
         int aid=Integer.parseInt(applicantComboBox.getSelectedItem().toString());
         
         Applicant applicant=this.business.findApplicant(aid);
@@ -536,6 +554,7 @@ public class ApplicantJPanel extends javax.swing.JPanel {
             
             model1.addRow(row);
             }
+        
         }
     }//GEN-LAST:event_createVaccineActionPerformed
 

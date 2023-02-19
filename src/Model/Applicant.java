@@ -10,7 +10,7 @@ import Model.Pet;
  * @author sruthisivasankar
  */
 public class Applicant {
-    private static int count=3;
+    private static int count=1000;
     private int applicationId;
     private String OwnerFirstName;
     private String ownerLastName;
@@ -19,12 +19,12 @@ public class Applicant {
     
     Applicant(){
         this.applicationId=count;
-        Applicant.count=count+4;
+        Applicant.count=count+1;
 }
 
     public Applicant(String OwnerFirstName, String ownerLastName, String applicationDate) {
         this.applicationId=count;
-        Applicant.count=count+4;
+        Applicant.count=count+1;
         this.OwnerFirstName = OwnerFirstName;
         this.ownerLastName = ownerLastName;
         this.applicationDate = applicationDate;
