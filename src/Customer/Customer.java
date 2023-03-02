@@ -10,6 +10,7 @@ package Customer;
  * @author Nidhi Raghavendra
  */
 public class Customer {
+    static int count=1000;
     String name;
     int customerId;
     
@@ -17,9 +18,10 @@ public class Customer {
         
     }
     
-    public Customer(String name,int customerId){
-        this.customerId=customerId;
+    public Customer(String name){
+        this.customerId=count;
         this.name=name;
+        count=count+1;
     }
 
     public String getName() {
@@ -37,6 +39,7 @@ public class Customer {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
+    
      @Override
     public String toString(){
         return this.name;

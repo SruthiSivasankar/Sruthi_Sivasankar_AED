@@ -71,11 +71,11 @@ public class Book extends Material {
         this.genre = genre;
     }
     
-    public Genre newGenre(String genreName){
-        Genre g=new Genre(genreName);
-        genre.add(g);
-        return g;
-    }
+//    public Genre newGenre(String genreName){
+//        Genre g=new Genre(genreName);
+//        genre.add(g);
+//        return g;
+//    }
      @Override
     public String toString(){
         return this.getName();

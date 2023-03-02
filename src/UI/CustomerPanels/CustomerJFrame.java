@@ -7,8 +7,12 @@ package UI.CustomerPanels;
 
 import Business.Branch;
 import Business.Business;
+import Magazine.Magazine;
 import UI.MainJFrame;
 import UserAccount.UserAccount;
+import javax.swing.table.DefaultTableModel;
+import Library.RentRequest;
+import Book.Book;
 
 /**
  *
@@ -19,6 +23,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
     private Business business;
     private Branch branch;
     private UserAccount useraccount;
+   
 
     /**
      * Creates new form CustomerJFrame
@@ -34,6 +39,73 @@ public class CustomerJFrame extends javax.swing.JFrame {
        this.business = business;
        this.branch = branch;
        this.useraccount = useraccount;
+        lblCustomer.setText(this.useraccount.getUsername());
+       populatebranchcomobobox();
+    }
+    public void populaterentedtable(){
+//            DefaultTableModel model=(DefaultTableModel)customerbookstable.getModel();
+//    int index=customerbookstable.getSelectedRow();
+//    String s=model.getValueAt(index, 0).toString();
+//    Branch b=this.business.searchbranch((String) jComboBox1.getSelectedItem());
+        Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
+
+        DefaultTableModel model1=(DefaultTableModel)rentedTbl.getModel();
+        model1.setRowCount(0);
+        for (RentRequest r:b.getLibrary().getRentaldirectory().getRequestList()){
+             Object[] row=new Object[4];
+                  if(r.getBook()!=null){
+                    row[0]=r.getBook().getName();}
+                  if(r.getMagazine()!=null){
+                    row[0]=r.getMagazine().getName();  
+                  }
+                  
+                   
+                  row[1]=r.getID();
+                  row[2]=r.getStatus();
+                  
+                  model1.addRow(row);
+        }
+
+    }
+    
+    
+
+    public void populatebranchcomobobox(){
+        System.out.println("populating combobox");
+        for (Branch b:this.business.getBranches()){
+            branchComboBox.addItem(b.getName());
+        }
+    }
+    public void populatecutomerbookstable(){
+        System.out.println("populating books table");
+        Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
+        DefaultTableModel model=(DefaultTableModel)customerBookTbl.getModel();
+        model.setRowCount(0);
+        for(Book bs:b.getLibrary().getBookdirectory().getBookList()){
+            Object[] row=new Object[5];
+                  row[0]=bs;
+                  row[1]=bs.getAuthor().getAuthorName();
+                  row[2]=bs.getSerialNumber();
+                  row[3]=bs.getAvailabilityflag();
+                 
+                  model.addRow(row);
+                  
+        }
+    }
+    public void populatecustomermagazinetable(){
+         DefaultTableModel model=(DefaultTableModel)customerMagTbl.getModel();
+          Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
+        model.setRowCount(0);
+        for(Magazine u:b.getLibrary().getMagazinedirectory().getMagazinelist()){
+            Object[] row=new Object[6];
+                  row[0]=u;
+                  row[1]=u.getIssueType();
+                  row[2]=u.getSerialNumber();
+                  row[3]=u.getCompanyname();
+                  row[4]=u.getAvailabilityflag();
+                  model.addRow(row);
+
+        }
     }
 
     /**
@@ -47,11 +119,28 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         backBtn = new javax.swing.JButton();
+        lblCustomer = new javax.swing.JLabel();
+        branchComboBox = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        customerBookTbl = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customerMagTbl = new javax.swing.JTable();
+        magRequestBtn = new javax.swing.JButton();
+        bookRequestBtn = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        rentedTbl = new javax.swing.JTable();
+        returnBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
+        backBtn.setBackground(new java.awt.Color(255, 51, 0));
         backBtn.setText("BACK");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,28 +148,164 @@ public class CustomerJFrame extends javax.swing.JFrame {
             }
         });
 
+        lblCustomer.setBorder(new javax.swing.border.MatteBorder(null));
+
+        branchComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                branchComboBoxItemStateChanged(evt);
+            }
+        });
+
+        customerBookTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "BOOK NAME", "AUTHOR", "SERIAL NUMBER", "AVAILABILITY STATUS"
+            }
+        ));
+        jScrollPane3.setViewportView(customerBookTbl);
+
+        customerMagTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "MAGAZINE NAME", "ISSUE TYPE", "SERIAL NUMBER", "COMPANY NAME", "AVAILABILITY STATUS"
+            }
+        ));
+        jScrollPane1.setViewportView(customerMagTbl);
+
+        magRequestBtn.setText("REQUEST MAGAZINE");
+        magRequestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                magRequestBtnActionPerformed(evt);
+            }
+        });
+
+        bookRequestBtn.setText("REQUEST BOOK");
+        bookRequestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookRequestBtnActionPerformed(evt);
+            }
+        });
+
+        rentedTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "MATERIAL NAME", "RENTAL ID", "RENTAL STATUS"
+            }
+        ));
+        jScrollPane4.setViewportView(rentedTbl);
+
+        returnBtn.setText("RETURN RENTAL");
+        returnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 21)); // NOI18N
+        jLabel1.setText("CUSTOMER");
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel2.setText("SELECT BRANCH");
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel3.setText("BOOK LIST");
+
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel4.setText("MAGAZINE LIST");
+
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel5.setText("RENTED MATERIALS:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(backBtn)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(magRequestBtn)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel1)
+                                    .addGap(377, 377, 377))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(35, 35, 35)
+                                            .addComponent(branchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(backBtn))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(bookRequestBtn))
+                            .addGap(50, 50, 50)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(returnBtn)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(backBtn)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(backBtn)
+                        .addComponent(jLabel1))
+                    .addComponent(lblCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(branchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bookRequestBtn)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(returnBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(magRequestBtn)
+                .addGap(18, 18, 18))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -90,6 +315,90 @@ public class CustomerJFrame extends javax.swing.JFrame {
         this.setVisible(false);
         new MainJFrame(business, branch, useraccount);
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void branchComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_branchComboBoxItemStateChanged
+        // TODO add your handling code here:
+        populatecutomerbookstable();
+        populatecustomermagazinetable();
+
+        populaterentedtable();
+    }//GEN-LAST:event_branchComboBoxItemStateChanged
+
+    private void magRequestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_magRequestBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model1=(DefaultTableModel)customerMagTbl.getModel();
+        int i=customerMagTbl.getSelectedRow();
+        String str=model1.getValueAt(i, 0).toString();
+        Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
+        Magazine m = b.getLibrary().getMagazinedirectory().searchmagazine(str);
+        RentRequest rtemp1 = b.getLibrary().getRentaldirectory().newrentalrequest();
+        rtemp1.setMagazine(m);
+        populaterentedtable();
+
+        //        populatecustomermagazinetable();
+
+        //           DefaultTableModel model=(DefaultTableModel)customerbookstable.getModel();
+        //    int index=customerbookstable.getSelectedRow();
+        //    String s=model.getValueAt(index, 0).toString();
+        //    Branch b=this.business.searchbranch((String) jComboBox1.getSelectedItem());
+        //    Books tempbook=b.getLibrary().getBooksdirectory().searchbook(s);
+        //    RentalRequest rtemp=b.getLibrary().getRentalrequestdirectory().newrentalrequest();
+        //    rtemp.setBooks(tempbook);
+        //
+        //    populaterentedtable();
+        //    populatecutomerbookstable();
+
+    }//GEN-LAST:event_magRequestBtnActionPerformed
+
+    private void bookRequestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookRequestBtnActionPerformed
+        // TODO add your handling code here:
+
+        DefaultTableModel model=(DefaultTableModel)customerBookTbl.getModel();
+        int index=customerBookTbl.getSelectedRow();
+        String s=model.getValueAt(index, 0).toString();
+        Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
+        Book tempbook=b.getLibrary().getBookdirectory().searchbook(s);
+        RentRequest rtemp=b.getLibrary().getRentaldirectory().newrentalrequest();
+        rtemp.setBook(tempbook);
+
+        populaterentedtable();
+        populatecutomerbookstable();
+
+    }//GEN-LAST:event_bookRequestBtnActionPerformed
+
+    private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model=(DefaultTableModel)rentedTbl.getModel();
+        int index=rentedTbl.getSelectedRow();
+        String s=model.getValueAt(index, 0).toString();
+        Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
+
+        if(b.getLibrary().getMagazinedirectory().searchmagazine(s)!=null)
+        {
+
+            Magazine tempm=b.getLibrary().getMagazinedirectory().searchmagazine(s);
+
+            tempm.setAvailabilityflag(true);
+            populatecustomermagazinetable();
+            int sm=Integer.parseInt(model.getValueAt(index, 1).toString());
+            RentRequest r= b.getLibrary().getRentaldirectory().searchrequest(sm);
+            r.setStatus("returned");
+            populaterentedtable();
+        }
+        if(b.getLibrary().getBookdirectory().searchbook(s)!=null)
+        { Book tempbook=b.getLibrary().getBookdirectory().searchbook(s);
+            tempbook.setAvailabilityflag(true);
+            populatecutomerbookstable();
+            int sm=Integer.parseInt(model.getValueAt(index, 1).toString());
+            RentRequest r= b.getLibrary().getRentaldirectory().searchrequest(sm);
+            r.setStatus("returned");
+            populaterentedtable();
+
+        }
+
+        //            populaterentedtable();
+
+    }//GEN-LAST:event_returnBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +437,22 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton bookRequestBtn;
+    private javax.swing.JComboBox<String> branchComboBox;
+    private javax.swing.JTable customerBookTbl;
+    private javax.swing.JTable customerMagTbl;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblCustomer;
+    private javax.swing.JButton magRequestBtn;
+    private javax.swing.JTable rentedTbl;
+    private javax.swing.JButton returnBtn;
     // End of variables declaration//GEN-END:variables
 }

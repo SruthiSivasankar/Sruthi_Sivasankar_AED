@@ -78,7 +78,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel1.add(comboBoxRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 100, 30));
 
-        loginBtn.setBackground(new java.awt.Color(255, 51, 51));
+        loginBtn.setBackground(new java.awt.Color(0, 204, 51));
         loginBtn.setText("LOGIN");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

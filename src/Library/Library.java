@@ -107,11 +107,11 @@ public class Library {
         this.rentaldirectory = rentaldirectory;
     }
     
-     public Genre newGenre(String genreName){
-        Genre g=new Genre(genreName);
-        genre.add(g);
-        return g;
-    }
+//     public Genre newGenre(String genreName){
+//        Genre g=new Genre(genreName);
+//        genre.add(g);
+//        return g;
+//    }
 
     
 }

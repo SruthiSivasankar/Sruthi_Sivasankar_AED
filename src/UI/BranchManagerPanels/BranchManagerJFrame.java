@@ -52,11 +52,12 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
           
                 Object[] row=new Object[7];
                   row[0]=u;
-                  row[1]=u.getSerialNumber();
+                  row[1]=u.getAuthor().getAuthorName();
                   row[2]=u.getLanguage();
-                  row[3]=u.getTypeOfBinding();
-                  row[4]=u.getAuthor().getAuthorName();
+                  row[3]=u.getSerialNumber();
+                  row[4]=u.getTypeOfBinding();
                   row[5]=u.getAvailabilityflag();
+                  row[6]=u.getGenre();
                  
                   
                  // row[6]=String.join(",", s);
@@ -72,9 +73,9 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
         for(Magazine u:this.branch.getLibrary().getMagazinedirectory().getMagazinelist()){
             Object[] row=new Object[6];
                   row[0]=u;
-                  row[1]=u.getSerialNumber();
-                  row[2]=u.getCompanyname();
-                  row[3]=u.getIssueType();
+                  row[1]=u.getIssueType();
+                  row[2]=u.getSerialNumber();
+                  row[3]=u.getCompanyname();
                   row[4]=u.getAvailabilityflag();
                   model.addRow(row);
 
@@ -144,7 +145,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "BOOK NAME", "SERIAL NUMBER", "LANGUAGE", "BINDING TYPE", "AUTHOR", "AVAILABILITY STATUS", "GENRE"
+                "BOOK NAME", "AUTHOR", "LANGUAGE", "SERIAL NUMBER", "BINDING TYPE", "AVAILABILITY STATUS", "GENRE"
             }
         ));
         jScrollPane3.setViewportView(bookTbl);
@@ -157,7 +158,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "MAGAZINE NAME", "SERIAL NUMBER", "COMPANY NAME", "ISSUE TYPE", "AVAILABILITY STATUS"
+                "MAGAZINE NAME", "ISSUE TYPE", "SERIAL NUMBER", "COMPANY NAME", "AVAILABILITY STATUS"
             }
         ));
         jScrollPane4.setViewportView(magazineTbl);
@@ -206,38 +207,32 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3)
-                                    .addComponent(jScrollPane4))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(backBtn)
-                                .addComponent(revenueBtn))
-                            .addComponent(RevenueDisplay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(304, 304, 304)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(304, 304, 304)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))))
+                .addContainerGap(478, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4)
+                        .addComponent(jScrollPane3))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(revenueBtn)
+                    .addComponent(backBtn)
+                    .addComponent(RevenueDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +250,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(revenueBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(RevenueDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42)
                 .addComponent(jLabel4)

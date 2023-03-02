@@ -27,8 +27,8 @@ public class CustomerDirectory {
     }
     
     // implement code below
-    public Customer createCustomer(String name ,int customerId) {
-        Customer c=new Customer(name,customerId);
+    public Customer createCustomer(String name) {
+        Customer c=new Customer(name);
         customerlist.add(c);
         return c;
     }
