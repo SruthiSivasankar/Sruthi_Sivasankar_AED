@@ -13,6 +13,7 @@ import Role.BranchAdminRole;
 import Role.CustomerRole;
 import Role.Role;
 import Library.Library;
+import Role.LibrarianRole;
 import UI.MainJFrame;
 import UserAccount.UserAccount;
 import javax.swing.JOptionPane;
@@ -115,11 +116,10 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         registerBtn = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         FieldUsername = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         fieldLibrary = new javax.swing.JTextField();
-        btnaddlibrary = new javax.swing.JButton();
+        btnaddBranch = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         branchtable = new javax.swing.JTable();
@@ -143,10 +143,10 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(fieldBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 190, 40));
-        jPanel1.add(FieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 750, 190, 40));
+        jPanel1.add(FieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 190, 40));
 
         registerBtn.setText("REGISTER");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -154,23 +154,20 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                 registerBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 950, -1, -1));
+        jPanel1.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 720, -1, -1));
 
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 630, 190, 40));
-        jPanel1.add(FieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 690, 190, 40));
-
-        jButton1.setText("ADD BRANCH");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 190, 40));
+        jPanel1.add(FieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 190, 40));
 
         backBtn.setBackground(new java.awt.Color(255, 0, 0));
         backBtn.setText("BACK");
@@ -182,16 +179,16 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         jPanel1.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
 
         jLabel1.setText("USER NAME:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
         jPanel1.add(fieldLibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 190, 40));
 
-        btnaddlibrary.setText("ADD LIBRARY");
-        btnaddlibrary.addActionListener(new java.awt.event.ActionListener() {
+        btnaddBranch.setText("ADD BRANCH");
+        btnaddBranch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaddlibraryActionPerformed(evt);
+                btnaddBranchActionPerformed(evt);
             }
         });
-        jPanel1.add(btnaddlibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 120, -1));
+        jPanel1.add(btnaddBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 120, -1));
 
         jButton2.setText("DELETE BRANCH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +196,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
 
         branchtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,21 +211,21 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(branchtable);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 330, 180));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 440, 120));
 
         fieldLibrarianExperience.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldLibrarianExperienceActionPerformed(evt);
             }
         });
-        jPanel1.add(fieldLibrarianExperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 810, 190, 40));
+        jPanel1.add(fieldLibrarianExperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, 190, 40));
 
         fieldBMexperience.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldBMexperienceActionPerformed(evt);
             }
         });
-        jPanel1.add(fieldBMexperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 880, 190, 40));
+        jPanel1.add(fieldBMexperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 650, 190, 40));
 
         usertable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,7 +240,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(usertable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 820, 440, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 590, 440, 160));
 
         employeetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -258,7 +255,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(employeetable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 620, 440, 160));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 440, 160));
 
         jLabel2.setText("LOCATION:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
@@ -272,31 +269,31 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel5.setText("BRANCH LIST:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel6.setText("CREATE USERS:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 590, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
 
         jLabel7.setText("PASSWORD:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 760, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
 
         jLabel8.setText("ROLE:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         lblLibrarianExperience.setText("LIBN EXPERIENCE:");
-        jPanel1.add(lblLibrarianExperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 820, -1, -1));
+        jPanel1.add(lblLibrarianExperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
 
         lblBMexperience.setText("BM EXPERIENCE:");
-        jPanel1.add(lblBMexperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 890, -1, -1));
+        jPanel1.add(lblBMexperience, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel11.setText("EMPLOYEE LIST:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 590, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel12.setText("USER LIST:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 800, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, -1, -1));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -310,12 +307,29 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         // remember to check if the credentials are unique
         if (
             jComboBox1.getSelectedItem().equals("customer")) {
-            business.getTopLevelUserAccountDirectory().createUserAccount(FieldUsername.getText(), FieldPassword.getText(), new CustomerRole());
-           
-            business.getCustomerdirectory().createCustomer(FieldUsername.getText());
-            System.out.print(business.getCustomerdirectory().getCustomerlist().get(0));
-            JOptionPane.showMessageDialog(null, "CUSTOMER ADDED SUCCESSFULLY.");
-            populateusertable();
+//           
+//            business.getCustomerdirectory().createCustomer(FieldUsername.getText());
+//            System.out.print(business.getCustomerdirectory().getCustomerlist().get(0));
+//            JOptionPane.showMessageDialog(null, "CUSTOMER ADDED SUCCESSFULLY.");
+//            populateusertable();
+                String username = FieldUsername.getText();
+            String password = FieldPassword.getText();
+    
+            boolean isUsernameUnique = true;
+            for (UserAccount user : business.getTopLevelUserAccountDirectory().getUseraccountList()){
+                if (user.getUsername().equals(username)){
+                    isUsernameUnique = false;
+                    break;
+                }
+            }
+             if (!isUsernameUnique) {
+        JOptionPane.showMessageDialog(null, "Username name already exists. Please enter unique credentials.");
+             }else {
+                 business.getTopLevelUserAccountDirectory().createUserAccount(FieldUsername.getText(), FieldPassword.getText(), new CustomerRole());          
+                 business.getCustomerdirectory().createCustomer((FieldUsername.getText()));
+                 JOptionPane.showMessageDialog(null, "CUSTOMER ADDED SUCCESSFULLY");
+                 populateusertable();
+             }
 
 
         }
@@ -340,9 +354,10 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                 }
                 
 
-            } else {
-                JOptionPane.showMessageDialog(null, "Create a new branch by filling the branch field to add it's branch manager.");
-            }
+            } 
+//            else {
+//                JOptionPane.showMessageDialog(null, "Create a new branch by filling the branch field to add it's branch manager.");
+//            }
         
         
          if (jComboBox1.getSelectedItem().equals("librarian")) {
@@ -369,9 +384,9 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                     
                 }
          
-                else {
-                JOptionPane.showMessageDialog(null, "Create a new branch by filling the branch field to add it's branch manager.");
-            }
+//                else {
+//                JOptionPane.showMessageDialog(null, "Create a new branch by filling the branch field to add it's branch manager.");
+//            }
         }
         lblLibrarianExperience.setVisible(false);
         fieldLibrarianExperience.setVisible(false);
@@ -380,28 +395,23 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registerBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // check for unique branch name
-        this.branch = this.business.createBranch(fieldBranch.getText());
-        JOptionPane.showMessageDialog(null, "Branch Added");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new MainJFrame(business, branch, useraccount);
     }//GEN-LAST:event_backBtnActionPerformed
 
-    private void btnaddlibraryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddlibraryActionPerformed
+    private void btnaddBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddBranchActionPerformed
         // TODO add your handling code here:
+        this.branch = this.business.createBranch(fieldBranch.getText());
         Library l1= new Library(Integer.parseInt(fieldLibrary.getText()));
         Branch branch1=this.business.searchbranch(fieldBranch.getText());
         branch1.setLibrary(l1);
+        JOptionPane.showMessageDialog(null, "Branch Added");
         populatebranchtable();
         
 
-    }//GEN-LAST:event_btnaddlibraryActionPerformed
+    }//GEN-LAST:event_btnaddBranchActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -432,6 +442,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 ////                    lblcustomerprofession.setVisible(true);
 //                  //  JOptionPane.showMessageDialog(null, "Customer ID generated");
 //        }
+
         if(jComboBox1.getSelectedItem().equals("branch manager")){
              lblBMexperience.setVisible(true);
         fieldBMexperience.setVisible(true);
@@ -443,6 +454,10 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Enter librarian experience");
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,13 +499,12 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField FieldUsername;
     private javax.swing.JButton backBtn;
     private javax.swing.JTable branchtable;
-    private javax.swing.JButton btnaddlibrary;
+    private javax.swing.JButton btnaddBranch;
     private javax.swing.JTable employeetable;
     private javax.swing.JTextField fieldBMexperience;
     private javax.swing.JTextField fieldBranch;
     private javax.swing.JTextField fieldLibrarianExperience;
     private javax.swing.JTextField fieldLibrary;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;

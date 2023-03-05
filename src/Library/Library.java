@@ -21,7 +21,7 @@ public class Library {
     BookDirectory bookdirectory;
     MagazineDirectory magazinedirectory;
     AuthorDirectory authordirectory;
-    Genre genre;
+    ArrayList<Genre> genrelist;
     BranchManager branchmanager;
     Librarian librarian;
     RentalDirectory rentaldirectory;
@@ -30,13 +30,13 @@ public class Library {
         magazinedirectory=new MagazineDirectory();
         bookdirectory=new BookDirectory();
         authordirectory=new AuthorDirectory();
-//        genre =new Genre();
+        genrelist=new ArrayList<Genre>();
     }
     public Library(int buildingNo){
         magazinedirectory=new MagazineDirectory();
         bookdirectory=new BookDirectory();
         authordirectory=new AuthorDirectory();
-//        genre=new Genre();
+        genrelist=new ArrayList<Genre>();
         this.buildingNo=buildingNo;
         this.rentaldirectory=new RentalDirectory();
 //        this.librarian=new Librarian();
@@ -75,12 +75,12 @@ public class Library {
         this.authordirectory = authordirectory;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public ArrayList<Genre> getGenrelist() {
+        return genrelist;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenrelist(ArrayList<Genre> genrelist) {
+        this.genrelist = genrelist;
     }
 
     public BranchManager getBranchmanager() {
@@ -107,11 +107,11 @@ public class Library {
         this.rentaldirectory = rentaldirectory;
     }
     
-//     public Genre newGenre(String genreName){
-//        Genre g=new Genre(genreName);
-//        genre.add(g);
-//        return g;
-//    }
+     public Genre newGenre(String genreName){
+        Genre g=new Genre(genreName);
+        genrelist.add(g);
+        return g;
+    }
 
     
 }

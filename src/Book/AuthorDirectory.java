@@ -30,5 +30,13 @@ public class AuthorDirectory {
         return a;
         
     }
+    public Author searchauthor(String name){
+        for (Author a: authorList){
+            if(a.getAuthorName().equals(name)){
+                return a;
+            }
+        }
+        return null;
+    }
     
 }

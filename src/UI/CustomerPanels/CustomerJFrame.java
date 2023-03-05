@@ -76,6 +76,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
             branchComboBox.addItem(b.getName());
         }
     }
+    
     public void populatecutomerbookstable(){
         System.out.println("populating books table");
         Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
@@ -138,7 +139,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         backBtn.setBackground(new java.awt.Color(255, 51, 0));
         backBtn.setText("BACK");
@@ -153,6 +154,11 @@ public class CustomerJFrame extends javax.swing.JFrame {
         branchComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 branchComboBoxItemStateChanged(evt);
+            }
+        });
+        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchComboBoxActionPerformed(evt);
             }
         });
 
@@ -399,6 +405,10 @@ public class CustomerJFrame extends javax.swing.JFrame {
         //            populaterentedtable();
 
     }//GEN-LAST:event_returnBtnActionPerformed
+
+    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_branchComboBoxActionPerformed
 
     /**
      * @param args the command line arguments

@@ -59,7 +59,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,8 @@ public class MainJFrame extends javax.swing.JFrame {
         if(this.business.getTopLevelUserAccountDirectory().authenticateUser(jTextField1.getText(), jTextField1.getText()) != null) {
             UserAccount user = this.business.getTopLevelUserAccountDirectory().authenticateUser(jTextField1.getText(), jTextField1.getText());
             foundUser = true;
-            user.getRole().createWorkArea(business, branch, useraccount);
+            user.getRole().createWorkArea(this.business, user.getBranch(), user);
+            System.out.println("1st");
             this.setVisible(false);
         } else {
             for(Branch branch: this.business.getBranches()) {
