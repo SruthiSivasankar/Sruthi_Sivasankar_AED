@@ -8,6 +8,7 @@ import Book.BookDirectory;
 import Book.AuthorDirectory;
 import Magazine.MagazineDirectory;
 import Book.Genre;
+import Book.GenreDirectory;
 import Employee.BranchManager;
 import Employee.Librarian;
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class Library {
     BookDirectory bookdirectory;
     MagazineDirectory magazinedirectory;
     AuthorDirectory authordirectory;
-    ArrayList<Genre> genrelist;
+  //  ArrayList<Genre> genrelist;
+    GenreDirectory genredirectory;
     BranchManager branchmanager;
     Librarian librarian;
     RentalDirectory rentaldirectory;
@@ -30,13 +32,14 @@ public class Library {
         magazinedirectory=new MagazineDirectory();
         bookdirectory=new BookDirectory();
         authordirectory=new AuthorDirectory();
-        genrelist=new ArrayList<Genre>();
+      //  genrelist=new ArrayList<Genre>();
     }
     public Library(int buildingNo){
         magazinedirectory=new MagazineDirectory();
         bookdirectory=new BookDirectory();
         authordirectory=new AuthorDirectory();
-        genrelist=new ArrayList<Genre>();
+       // genrelist=new ArrayList<Genre>();
+       genredirectory = new GenreDirectory();
         this.buildingNo=buildingNo;
         this.rentaldirectory=new RentalDirectory();
 //        this.librarian=new Librarian();
@@ -75,14 +78,21 @@ public class Library {
         this.authordirectory = authordirectory;
     }
 
-    public ArrayList<Genre> getGenrelist() {
-        return genrelist;
+    public GenreDirectory getGenredirectory() {
+        return genredirectory;
     }
 
-    public void setGenrelist(ArrayList<Genre> genrelist) {
-        this.genrelist = genrelist;
+//    public ArrayList<Genre> getGenrelist() {
+//        return genrelist;
+//    }
+//
+//    public void setGenrelist(ArrayList<Genre> genrelist) {
+//        this.genrelist = genrelist;
+    public void setGenredirectory(GenreDirectory genredirectory) {
+        this.genredirectory = genredirectory;
     }
 
+//    }
     public BranchManager getBranchmanager() {
         return branchmanager;
     }
@@ -107,18 +117,6 @@ public class Library {
         this.rentaldirectory = rentaldirectory;
     }
     
-     public Genre newGenre(String genreName){
-        Genre g=new Genre(genreName);
-        genrelist.add(g);
-        return g;
-    }
-    public Genre searchgenre(String name){
-        for(Genre g:genrelist){
-            if(g.getName().equals(name)){
-                return g;
-            }
-        }
-        return null;
-    }
+     
   
 }

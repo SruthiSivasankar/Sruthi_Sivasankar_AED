@@ -49,14 +49,22 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         for (RentRequest r:this.branch.getLibrary().getRentaldirectory().getRequestList()){
              Object[] row=new Object[7];
-                  if(r.getBook()!=null){
+                  if(r.getBook()==null){
+                      
+                      row[0]="";
+                  }
+                  else{
                   row[0]=r.getBook().getName();}
-                  if(r.getMagazine()!=null){
-                  row[0]=r.getMagazine().getName();}
                   row[1]=r.getID();
-                  row[2]=r.getPrice();
-                  row[3]=r.getRentDuration();
-                  row[4]=r.getStatus();
+                if(r.getMagazine()==null){
+                     
+                      row[2]="";}
+                  
+                  else{
+                    row[2]=r.getMagazine().getName();}
+                  row[3]=r.getPrice();
+                  row[4]=r.getRentDuration();
+                  row[5]=r.getStatus();
                   model.addRow(row);
         }
 
@@ -78,7 +86,12 @@ public class LibrarianJFrame extends javax.swing.JFrame {
 //                  row[6]=u.getAuthor().getAuthorName();
 //                  row[7]=u.getAuthor().getAuthorRating();
                   row[6]=u.getAvailabilityflag();
-                 
+                 if(u.getAuthor() != null && u.getAuthor().getAuthorName()!= null ){
+                    row[7]=u.getAuthor().getAuthorName();}
+                    
+                if( u.getGenre() != null && u.getGenre().getName() != null){
+                    row[8]=u.getGenre().getName();
+                }
                   
                  // row[6]=String.join(",", s);
                   model.addRow(row);
@@ -157,6 +170,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         backBTn = new javax.swing.JButton();
         assignAuthBtn = new javax.swing.JButton();
         assignGenreBtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
@@ -260,7 +274,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "MATERIAL NAME", "RENTAL ID", "PRICE", "DURATION", "AVAILABILITY STATUS"
+                "BOOK NAME", "RENTAL ID", "MAGAZINE NAME", "PRICE", "DURATION", "AVAILABILITY STATUS"
             }
         ));
         jScrollPane2.setViewportView(rentalTbl);
@@ -303,7 +317,6 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         });
         getContentPane().add(addGenreBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, -1));
 
-        genreCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         getContentPane().add(genreCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 104, -1));
 
         addAuthorBtn.setText("ADD AUTHOR");
@@ -341,6 +354,10 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         });
         getContentPane().add(assignGenreBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, -1, -1));
 
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 21)); // NOI18N
+        jLabel9.setText("LIBRARIAN");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -360,7 +377,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         authorNameField.setText("");
         authorRatingField.setText("");
         genreField.setText("");
-        genreCB.removeAllItems();
+     //   genreCB.removeAllItems();
         //      System.out.println("b1 has these "+b1.getGenre().get(1));
         populatebookstable();
     }//GEN-LAST:event_addBookBtnActionPerformed
@@ -385,6 +402,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         int index=rentalTbl.getSelectedRow();
         String s= model.getValueAt(index, 0).toString();
         int i=Integer.parseInt(model.getValueAt(index, 1).toString());
+        
         Book tempbook= this.branch.getLibrary().getBookdirectory().searchbook(s);
         RentRequest temprequest=this.branch.getLibrary().getRentaldirectory().searchrequest(i);
         temprequest.setStatus("Booked");
@@ -435,11 +453,13 @@ public class LibrarianJFrame extends javax.swing.JFrame {
 //        b.getGenre().add(gm);
 //        genreCB.addItem(s);
 //        model.setValueAt(s, index, 6);
-        Genre g= new Genre(s);
+    //    Genre g= new Genre(s);
+        
+        this.branch.getLibrary().getGenredirectory().newGenre(s);
         //       b.setGenre(g);
-               this.branch.getLibrary().getGenrelist().add(g);
 
                genreCB.addItem(s);
+               genreField.setText("");
 
        
 
@@ -455,7 +475,8 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String author = authorNameField.getText();
         double authorRatingDouble = Double.parseDouble(authorRatingField.getText());
-        Author a= new Author(author,authorRatingDouble);
+     //   Author a= new Author(author,authorRatingDouble);
+        this.branch.getLibrary().getAuthordirectory().newAuthor(author, authorRatingDouble);
         authorCB.addItem(author);
         authorNameField.setText("");
     }//GEN-LAST:event_addAuthorBtnActionPerformed
@@ -471,7 +492,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         Author anew=this.branch.getLibrary().getAuthordirectory().searchauthor(value);
         b.setAuthor(anew);
         
-        model.setValueAt(value,index,7);
+        model.setValueAt(anew.getAuthorName(),index,7);
         
     }//GEN-LAST:event_assignAuthBtnActionPerformed
 
@@ -483,10 +504,10 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         Book b = this.branch.getLibrary().getBookdirectory().searchbook(bookname);
         
         String value= genreCB.getSelectedItem().toString();
-        Genre gnew=this.branch.getLibrary().searchgenre(value);
+        Genre gnew=this.branch.getLibrary().getGenredirectory().searchgenre(value);
         b.setGenre(gnew);
         
-        model.setValueAt(value, index, 8);
+        model.setValueAt(gnew.getName(), index, 8);
     }//GEN-LAST:event_assignGenreBtnActionPerformed
 
     /**
@@ -559,6 +580,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

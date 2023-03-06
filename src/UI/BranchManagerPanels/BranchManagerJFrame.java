@@ -52,12 +52,12 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
           
                 Object[] row=new Object[7];
                   row[0]=u;
-                 // row[1]=u.getAuthor().getAuthorName();
+                  row[1]=u.getAuthor().getAuthorName();
                   row[2]=u.getLanguage();
                   row[3]=u.getSerialNumber();
                   row[4]=u.getTypeOfBinding();
                   row[5]=u.getAvailabilityflag();
-               //   row[6]=u.getGenre();
+                  row[6]=u.getGenre();
                  
                   
                  // row[6]=String.join(",", s);
@@ -140,10 +140,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
         bookTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "BOOK NAME", "AUTHOR", "LANGUAGE", "SERIAL NUMBER", "BINDING TYPE", "AVAILABILITY STATUS", "GENRE"
@@ -153,10 +150,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
         magazineTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "MAGAZINE NAME", "ISSUE TYPE", "SERIAL NUMBER", "COMPANY NAME", "AVAILABILITY STATUS"
@@ -166,10 +160,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
         rentTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "BOOK NAME", "RENT ID", "PRICE", "RENT DURATION", "RENTAL STATUS"

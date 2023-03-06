@@ -143,7 +143,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(fieldBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 190, 40));
+        jPanel1.add(fieldBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 190, 40));
         jPanel1.add(FieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 190, 40));
 
         registerBtn.setText("REGISTER");
@@ -178,7 +178,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("USER NAME:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
-        jPanel1.add(fieldLibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 190, 40));
+        jPanel1.add(fieldLibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 190, 40));
 
         btnaddBranch.setText("ADD BRANCH");
         btnaddBranch.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +186,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                 btnaddBranchActionPerformed(evt);
             }
         });
-        jPanel1.add(btnaddBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 120, -1));
+        jPanel1.add(btnaddBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 120, -1));
 
         jButton2.setText("DELETE BRANCH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -198,10 +198,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         branchtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "BRANCH", "LIBRARY"
@@ -227,10 +224,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         usertable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ACCOUNT ID", "USERNAME", "PASSWORD", "ROLE"
@@ -242,10 +236,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         employeetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ACCOUNT ID", "USER NAME", "PASSWORD", "ROLE", "BRANCH"
@@ -256,10 +247,10 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 440, 160));
 
         jLabel2.setText("LOCATION:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel3.setText("BUILDING NO:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 21)); // NOI18N
         jLabel4.setText("SYSTEM ADMIN");

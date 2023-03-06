@@ -31,4 +31,12 @@ public class GenreDirectory {
         return g;
     }
     
+    public Genre searchgenre(String name){
+        for(Genre g:genreList){
+            if(g.getName().equals(name)){
+                return g;
+            }
+        }
+        return null;
+    }
 }

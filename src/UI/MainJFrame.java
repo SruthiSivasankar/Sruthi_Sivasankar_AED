@@ -56,6 +56,7 @@ public class MainJFrame extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +96,10 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2.setText("UserName:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 21)); // NOI18N
+        jLabel3.setText("LIBRARY MANAGEMENT");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -119,7 +124,6 @@ public class MainJFrame extends javax.swing.JFrame {
             UserAccount user = this.business.getTopLevelUserAccountDirectory().authenticateUser(jTextField1.getText(), jTextField1.getText());
             foundUser = true;
             user.getRole().createWorkArea(this.business, user.getBranch(), user);
-            System.out.println("1st");
             this.setVisible(false);
         } else {
             for(Branch branch: this.business.getBranches()) {
@@ -183,6 +187,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox comboBoxRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
