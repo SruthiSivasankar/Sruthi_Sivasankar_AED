@@ -112,6 +112,13 @@ public class Library {
         genrelist.add(g);
         return g;
     }
-
-    
+    public Genre searchgenre(String name){
+        for(Genre g:genrelist){
+            if(g.getName().equals(name)){
+                return g;
+            }
+        }
+        return null;
+    }
+  
 }

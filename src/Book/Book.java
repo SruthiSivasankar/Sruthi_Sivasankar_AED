@@ -16,15 +16,16 @@ public class Book extends Material {
     String language;
     String typeOfBinding;
     Author author;
-    ArrayList<Genre> genre; 
+//    ArrayList<Genre> genre; 
+    Genre genre;
     
     public Book(){
     }
     
-    public Book(int noOfpages,String language,String typeofBinding,String name,String  registerDate,String authorName, double Rating,String genreName){
+    public Book(int noOfpages,String language,String typeofBinding,String name,String  registerDate){
         super(name,registerDate);
-        this.genre=new ArrayList<Genre>();
-        this.author=new Author(authorName,Rating);
+     //   this.genre=new ArrayList<Genre>();
+     //   this.author=new Author(authorName,Rating);
         this.noOfPages=noOfpages;
         this.language=language;
         this.typeOfBinding=typeofBinding;
@@ -62,20 +63,28 @@ public class Book extends Material {
     public void setAuthor(Author author) {
         this.author = author;
     }
-
-    public ArrayList<Genre> getGenre() {
+    
+    public Genre getGenre(){
         return genre;
     }
 
-    public void setGenre(ArrayList<Genre> genre) {
+//    public ArrayList<Genre> getGenre() {
+//        return genre;
+//    }
+//
+//    public void setGenre(ArrayList<Genre> genre) {
+//        this.genre = genre;
+//    }
+//
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
-    
-    public Genre newGenre(String genreName){
-        Genre g=new Genre(genreName);
-        genre.add(g);
-        return g;
-    }
+
+//    public Genre newGenre(String genreName) {
+//        Genre g=new Genre(genreName);
+//        genre.add(g);
+//        return g;
+//    }
      @Override
     public String toString(){
         return this.getName();

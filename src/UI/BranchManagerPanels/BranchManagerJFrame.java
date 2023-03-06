@@ -52,12 +52,12 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
           
                 Object[] row=new Object[7];
                   row[0]=u;
-                  row[1]=u.getAuthor().getAuthorName();
+                 // row[1]=u.getAuthor().getAuthorName();
                   row[2]=u.getLanguage();
                   row[3]=u.getSerialNumber();
                   row[4]=u.getTypeOfBinding();
                   row[5]=u.getAvailabilityflag();
-                  row[6]=u.getGenre();
+               //   row[6]=u.getGenre();
                  
                   
                  // row[6]=String.join(",", s);

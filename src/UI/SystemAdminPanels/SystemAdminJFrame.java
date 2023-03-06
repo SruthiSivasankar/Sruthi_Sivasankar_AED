@@ -74,9 +74,7 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         for(Branch b:this.business.getBranches()){
          System.out.println("1stloop");
            for(UserAccount u:b.getBranchuseraccountDirectory().getUseraccountList()){
-                System.out.println("2ndloop");
-                System.out.println(u.getUsername());
-
+               
                 Object[] row=new Object[6];
                   row[0]=u;
                   row[1]=u.getUsername();

@@ -10,6 +10,7 @@ import Magazine.Magazine;
 import Library.RentRequest;
 import Book.Book;
 import Book.Genre;
+import Book.Author;
 import UserAccount.UserAccount;
 import Library.Library;
 import UI.MainJFrame;
@@ -74,9 +75,9 @@ public class LibrarianJFrame extends javax.swing.JFrame {
                   row[3]=u.getNoOfPages();
                   row[4]=u.getTypeOfBinding();
                   row[5]=u.getRegisterDate();                 
-                  row[6]=u.getAuthor().getAuthorName();
-                  row[7]=u.getAuthor().getAuthorRating();
-                  row[8]=u.getAvailabilityflag();
+//                  row[6]=u.getAuthor().getAuthorName();
+//                  row[7]=u.getAuthor().getAuthorRating();
+                  row[6]=u.getAvailabilityflag();
                  
                   
                  // row[6]=String.join(",", s);
@@ -154,6 +155,8 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         addAuthorBtn = new javax.swing.JButton();
         authorCB = new javax.swing.JComboBox<>();
         backBTn = new javax.swing.JButton();
+        assignAuthBtn = new javax.swing.JButton();
+        assignGenreBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
@@ -220,7 +223,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "BOOK NAME", "SERIAL NUMBER", "LANGUAGE", "NO. OF PAGES", "BINDING TYPE", "REGISTER DATE", "AUTHOR", "AUTHOR RATING", "AVAILABILITY STATUS", "GENRE"
+                "BOOK NAME", "SERIAL NUMBER", "LANGUAGE", "NO. OF PAGES", "BINDING TYPE", "REGISTER DATE", "AVAILABILITY STATUS", "AUTHOR", "GENRE"
             }
         ));
         jScrollPane1.setViewportView(booksTbl);
@@ -298,15 +301,20 @@ public class LibrarianJFrame extends javax.swing.JFrame {
                 addGenreBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(addGenreBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 251, -1, -1));
+        getContentPane().add(addGenreBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, -1));
 
         genreCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        getContentPane().add(genreCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 295, 104, -1));
+        getContentPane().add(genreCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 104, -1));
 
         addAuthorBtn.setText("ADD AUTHOR");
-        getContentPane().add(addAuthorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 292, -1, -1));
+        addAuthorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAuthorBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(addAuthorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, -1, -1));
 
-        getContentPane().add(authorCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(669, 286, 98, -1));
+        getContentPane().add(authorCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 98, -1));
 
         backBTn.setBackground(new java.awt.Color(255, 0, 0));
         backBTn.setText("BACK");
@@ -316,6 +324,22 @@ public class LibrarianJFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backBTn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, -1, -1));
+
+        assignAuthBtn.setText("ASSIGN AUTHOR");
+        assignAuthBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignAuthBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(assignAuthBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 220, -1, -1));
+
+        assignGenreBtn.setText("ASSIGN GENRE");
+        assignGenreBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignGenreBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(assignGenreBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -327,7 +351,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = dateFormat.format(date);
         Library l1=this.branch.getLibrary();
-        Book b1=l1.getBookdirectory().createBook(Integer.parseInt(pagesField.getText()), languageField.getText(), bindingtypeField.getText(), bookNameField.getText(), dateString, authorNameField.getText(), Double.parseDouble(authorRatingField.getText()), genreField.getText());
+        Book b1=l1.getBookdirectory().createBook(Integer.parseInt(pagesField.getText()), languageField.getText(), bindingtypeField.getText(), bookNameField.getText(), dateString);
         pagesField.setText("");
         languageField.setText("");
         bindingtypeField.setText("");
@@ -402,15 +426,21 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String s=genreField.getText();
 
-        DefaultTableModel model=(DefaultTableModel)booksTbl.getModel();
-        int index=booksTbl.getSelectedRow();
-        String sm= model.getValueAt(index, 0).toString();
+//        DefaultTableModel model=(DefaultTableModel)booksTbl.getModel();
+//        int index=booksTbl.getSelectedRow();
+//        String sm= model.getValueAt(index, 0).toString();
+//
+//        Book b=this.branch.getLibrary().getBookdirectory().searchbook(sm);
+//        Genre gm=new Genre(s);
+//        b.getGenre().add(gm);
+//        genreCB.addItem(s);
+//        model.setValueAt(s, index, 6);
+        Genre g= new Genre(s);
+        //       b.setGenre(g);
+               this.branch.getLibrary().getGenrelist().add(g);
 
-        Book b=this.branch.getLibrary().getBookdirectory().searchbook(sm);
-        Genre gm=new Genre(s);
-        b.getGenre().add(gm);
-        genreCB.addItem(s);
-        model.setValueAt(s, index, 6);
+               genreCB.addItem(s);
+
        
 
     }//GEN-LAST:event_addGenreBtnActionPerformed
@@ -420,6 +450,44 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         this.setVisible(false);
         new MainJFrame(business, branch, useraccount);
     }//GEN-LAST:event_backBTnActionPerformed
+
+    private void addAuthorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAuthorBtnActionPerformed
+        // TODO add your handling code here:
+        String author = authorNameField.getText();
+        double authorRatingDouble = Double.parseDouble(authorRatingField.getText());
+        Author a= new Author(author,authorRatingDouble);
+        authorCB.addItem(author);
+        authorNameField.setText("");
+    }//GEN-LAST:event_addAuthorBtnActionPerformed
+
+    private void assignAuthBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignAuthBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel)booksTbl.getModel();
+        int index = booksTbl.getSelectedRow();
+        String bookname = model.getValueAt(index, 0).toString();
+        Book b = this.branch.getLibrary().getBookdirectory().searchbook(bookname);
+        
+        String value= authorCB.getSelectedItem().toString();
+        Author anew=this.branch.getLibrary().getAuthordirectory().searchauthor(value);
+        b.setAuthor(anew);
+        
+        model.setValueAt(value,index,7);
+        
+    }//GEN-LAST:event_assignAuthBtnActionPerformed
+
+    private void assignGenreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignGenreBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model =(DefaultTableModel)booksTbl.getModel();
+        int index = booksTbl.getSelectedRow();
+        String bookname = model.getValueAt(index, 0).toString();
+        Book b = this.branch.getLibrary().getBookdirectory().searchbook(bookname);
+        
+        String value= genreCB.getSelectedItem().toString();
+        Genre gnew=this.branch.getLibrary().searchgenre(value);
+        b.setGenre(gnew);
+        
+        model.setValueAt(value, index, 8);
+    }//GEN-LAST:event_assignGenreBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,6 +529,8 @@ public class LibrarianJFrame extends javax.swing.JFrame {
     private javax.swing.JButton addBookBtn;
     private javax.swing.JButton addGenreBtn;
     private javax.swing.JButton addMagBtn;
+    private javax.swing.JButton assignAuthBtn;
+    private javax.swing.JButton assignGenreBtn;
     private javax.swing.JComboBox<String> authorCB;
     private javax.swing.JTextField authorNameField;
     private javax.swing.JTextField authorRatingField;

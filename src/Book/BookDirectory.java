@@ -25,8 +25,8 @@ public class BookDirectory {
     public void setBookList(ArrayList<Book> bookList) {
         this.bookList = bookList;
     }
-    public Book createBook(int noOfpages,String language,String typeofBinding,String name,String  registerDate,String authorName, double Rating,String genreName){
-        Book b1=new Book (noOfpages,language,typeofBinding,name,registerDate,   authorName,  Rating,genreName);
+    public Book createBook(int noOfpages,String language,String typeofBinding,String name,String  registerDate){
+        Book b1=new Book (noOfpages,language,typeofBinding,name,registerDate);
         bookList.add(b1);
         return b1;
         

@@ -13,6 +13,7 @@ import UserAccount.UserAccount;
 import javax.swing.table.DefaultTableModel;
 import Library.RentRequest;
 import Book.Book;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +42,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
        this.useraccount = useraccount;
         lblCustomer.setText(this.useraccount.getUsername());
        populatebranchcomobobox();
+       
     }
     public void populaterentedtable(){
 //            DefaultTableModel model=(DefaultTableModel)customerbookstable.getModel();
@@ -85,7 +87,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         for(Book bs:b.getLibrary().getBookdirectory().getBookList()){
             Object[] row=new Object[5];
                   row[0]=bs;
-                  row[1]=bs.getAuthor().getAuthorName();
+                //  row[1]=bs.getAuthor().getAuthorName();
                   row[2]=bs.getSerialNumber();
                   row[3]=bs.getAvailabilityflag();
                  
@@ -337,11 +339,17 @@ public class CustomerJFrame extends javax.swing.JFrame {
         String str=model1.getValueAt(i, 0).toString();
         Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
         Magazine m = b.getLibrary().getMagazinedirectory().searchmagazine(str);
+        if(m.getAvailabilityflag().equals(false)){
+                JOptionPane.showMessageDialog(null, "Magazine Already Booked");
+    
+        }
+        else{
         RentRequest rtemp1 = b.getLibrary().getRentaldirectory().newrentalrequest();
         rtemp1.setMagazine(m);
+        JOptionPane.showMessageDialog(null, "Requested for rental");}
         populaterentedtable();
 
-        //        populatecustomermagazinetable();
+               populatecustomermagazinetable();
 
         //           DefaultTableModel model=(DefaultTableModel)customerbookstable.getModel();
         //    int index=customerbookstable.getSelectedRow();
@@ -364,9 +372,14 @@ public class CustomerJFrame extends javax.swing.JFrame {
         String s=model.getValueAt(index, 0).toString();
         Branch b=this.business.searchbranch((String) branchComboBox.getSelectedItem());
         Book tempbook=b.getLibrary().getBookdirectory().searchbook(s);
+        if(tempbook.getAvailabilityflag().equals(false)){
+                JOptionPane.showMessageDialog(null, "Book Already Booked");
+    
+        }
+        else{
         RentRequest rtemp=b.getLibrary().getRentaldirectory().newrentalrequest();
         rtemp.setBook(tempbook);
-
+        JOptionPane.showMessageDialog(null, "Requested for rental");}
         populaterentedtable();
         populatecutomerbookstable();
 
@@ -388,8 +401,12 @@ public class CustomerJFrame extends javax.swing.JFrame {
             populatecustomermagazinetable();
             int sm=Integer.parseInt(model.getValueAt(index, 1).toString());
             RentRequest r= b.getLibrary().getRentaldirectory().searchrequest(sm);
+            if(r.getStatus().equals("Booked")){
             r.setStatus("returned");
             populaterentedtable();
+            }else{
+                JOptionPane.showMessageDialog(null, "you dont have the magazine to return");
+            }
         }
         if(b.getLibrary().getBookdirectory().searchbook(s)!=null)
         { Book tempbook=b.getLibrary().getBookdirectory().searchbook(s);
@@ -397,9 +414,12 @@ public class CustomerJFrame extends javax.swing.JFrame {
             populatecutomerbookstable();
             int sm=Integer.parseInt(model.getValueAt(index, 1).toString());
             RentRequest r= b.getLibrary().getRentaldirectory().searchrequest(sm);
+                        if(r.getStatus().equals("Booked")){
             r.setStatus("returned");
             populaterentedtable();
-
+            }else{
+                JOptionPane.showMessageDialog(null, "you dont have the book to return");
+            }
         }
 
         //            populaterentedtable();
